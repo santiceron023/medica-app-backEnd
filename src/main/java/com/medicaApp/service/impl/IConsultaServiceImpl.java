@@ -28,13 +28,14 @@ public class IConsultaServiceImpl implements IConsultaService {
 		return dao.save(con);
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
 	public Consulta registrarTransaccional(ConsultaListaExamenDto dto) { 
 		
 		dto.getConsulta().getDetalleConsulta().forEach(
 				detalle -> detalle.setConsulta(dto.getConsulta()) 
 				);
-		dao.save(dto.getConsulta());
+		Consulta conSaved = dao.save(dto.getConsulta());
 		
 		
 		//consulta exmaen , es 1 objeto formado de 2 obj llave compuesta

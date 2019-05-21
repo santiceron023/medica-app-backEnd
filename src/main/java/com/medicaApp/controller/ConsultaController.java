@@ -36,6 +36,22 @@ public class ConsultaController {
 
 		return ResponseEntity.created(uriLocation).build();
 	}
+	
+	@PostMapping
+	@RequestMapping("/listaExamen")
+	//un solo Json
+	public ResponseEntity<Paciente> registrarListaExamen(@RequestBody Consulta cons) {
+		//	public ResponseEntity<Paciente> registrar(@RequestBody Consulta cons) {
+
+		Consulta conSaved = servicio.registrar(cons);
+
+		//original + id 
+		URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest().
+				path("/{id}").buildAndExpand(conSaved.getIdConsulta()).toUri();
+
+		return ResponseEntity.created(uriLocation).build();
+	}
+
 
 
 }
