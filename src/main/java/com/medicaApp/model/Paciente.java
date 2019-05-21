@@ -21,12 +21,12 @@ public class Paciente {
 	
 	@Column(nullable = true, length = 150)
 	@ApiModelProperty(notes ="maximo 150 caracteres" )
-	@Size(min=3,message = "nombre minimo 3 caracteres")
+	@Size(min=3,message = "direccion minimo 3 caracteres")
 	private String direccion;
 	
 	@Column(nullable = false, length = 8)
 	@ApiModelProperty(notes ="maximo 8 caracteres" )
-	@Size(min=3,message = "nombre minimo 3 caracteres")
+	@Size(min=3,message = "dni minimo 3 caracteres")
 	private String dni;
 	
 	@Column(nullable = false, length = 70)
@@ -35,11 +35,11 @@ public class Paciente {
 	private String nombres;
 	
 	@Column(nullable = false, length = 70)
-	@Size(min=3,message = "nombre minimo 3 caracteres")
+	@Size(min=3,message = "apellidos minimo 3 caracteres")
 	private String apellidos;
 	
 	@Column(nullable = true, length = 9)
-	@Size(min=3,message = "nombre minimo 3 caracteres")
+	@Size(min=3,message = "telefono minimo 3 caracteres")
 	private String telefono;
 	
 	@Column(nullable = true, length = 55)

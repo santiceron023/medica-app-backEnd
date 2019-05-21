@@ -18,7 +18,7 @@ public class DetalleConsulta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idDetalle;
+	private Integer idDetalle;
 
 	@JsonIgnore
 	//una consulta muchos detalles
@@ -32,11 +32,11 @@ public class DetalleConsulta {
 	@Column(name = "tratamiento", nullable = false, length = 300)
 	private String tratamiento;
 
-	public int getIdDetalle() {
+	public Integer getIdDetalle() {
 		return idDetalle;
 	}
 
-	public void setIdDetalle(int idDetalle) {
+	public void setIdDetalle(Integer idDetalle) {
 		this.idDetalle = idDetalle;
 	}
 

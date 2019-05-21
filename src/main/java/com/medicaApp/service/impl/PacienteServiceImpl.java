@@ -29,7 +29,7 @@ public class PacienteServiceImpl implements IPacienteService{
 	}
 
 	@Override
-	public void eliminar(int id) {
+	public void eliminar(Integer id) {
 		pacienteDao.delete(id);
 		
 	}
@@ -41,7 +41,7 @@ public class PacienteServiceImpl implements IPacienteService{
 	}
 
 	@Override
-	public Paciente listarPorId(int id) {
+	public Paciente listarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return pacienteDao.findOne(id);
 	}

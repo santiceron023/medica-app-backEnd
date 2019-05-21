@@ -25,7 +25,7 @@ public class Consulta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idConsulta;
+	private Integer idConsulta;
 	
 	//un paciente muchas consultas
 	@ManyToOne
@@ -76,11 +76,11 @@ public class Consulta {
 		this.detalleConsulta = detalleConsulta;
 	}
 
-	public int getIdConsulta() {
+	public Integer getIdConsulta() {
 		return idConsulta;
 	}
 
-	public void setIdConsulta(int idConsulta) {
+	public void setIdConsulta(Integer idConsulta) {
 		this.idConsulta = idConsulta;
 	}
 

@@ -1,6 +1,9 @@
 package com.medicaApp.controller;
 import java.net.URI;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -49,20 +52,17 @@ public class PacienteController {
 //		else {
 //			return new ResponseEntity<Paciente>(pac,HttpStatus.OK);
 //		}
-		
 		Resource<Paciente> resource = new Resource<Paciente>(pac);
 		//  /pacientes/   <--clase , uso el metodo busca la url y escribe el id
 		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).listarPorId(id));
 		//agregar el link al recurso
 		resource.add(linkTo.withRel("paciente-resource"));
 		//https://www.adictosaltrabajo.com/2013/12/02/spring-hateoas/
-		
 		return resource;
-
 	}
 
 	@PostMapping
-	public ResponseEntity<Paciente> registrar(@RequestBody Paciente pac) {
+	public ResponseEntity<Paciente> registrar(@Valid @RequestBody Paciente pac) {
 
 		Paciente pacSaved = servicio.registrar(pac);
 		//original + id 

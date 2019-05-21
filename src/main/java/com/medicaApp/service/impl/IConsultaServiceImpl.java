@@ -6,21 +6,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medicaApp.dao.IConsultaDao;
+import com.medicaApp.dao.IConsultaExamenDao;
+import com.medicaApp.dto.ConsultaListaExamenDto;
 import com.medicaApp.model.Consulta;
 import com.medicaApp.service.IConsultaService;
 
 @Service
 public class IConsultaServiceImpl implements IConsultaService {
 
+	@Autowired
+	IConsultaExamenDao conExaDao;
 	
 	@Autowired
 	IConsultaDao dao;
 	
+	
+	//consultaExamen
 	@Override
-	public Consulta registrar(Consulta con) {
+	public Consulta registrar(Consulta con) { 
 		con.getDetalleConsulta().forEach(detalle -> detalle.setConsulta(con) );
 		return dao.save(con);
 	}
+	
+	@Override
+	public Consulta registrarTransaccional(ConsultaListaExamenDto dto) { 
+		
+		dto.getConsulta().getDetalleConsulta().forEach(
+				detalle -> detalle.setConsulta(dto.getConsulta()) 
+				);
+		dao.save(dto.getConsulta());
+		
+		
+		//consulta exmaen , es 1 objeto formado de 2 obj llave compuesta
+		dto.getExamenList().forEach(
+				e -> conExaDao.registrar(dto.getConsulta().getIdConsulta(), e.getIdExamen())
+				);
+		
+		return dto.getConsulta();
+	}
+
 
 	@Override
 	public Consulta modificar(Consulta t) {
@@ -29,7 +53,7 @@ public class IConsultaServiceImpl implements IConsultaService {
 	}
 
 	@Override
-	public void eliminar(int id) {
+	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -41,9 +65,10 @@ public class IConsultaServiceImpl implements IConsultaService {
 	}
 
 	@Override
-	public Consulta listarPorId(int id) {
+	public Consulta listarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

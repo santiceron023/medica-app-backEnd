@@ -41,7 +41,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 	
 
 
-	//no funciona, revisar
+	//no funciona ---> necesitaba el valid para comprobar el constrain
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -49,7 +49,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		//obtener tdos los erroes
 		String errores = "";
 		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
-			errores += error.getObjectName();	
+			errores +=  error.getDefaultMessage()+ ";";
 		}
 		//clase que hice
 		ExceptionResponse excepResp = new ExceptionResponse(new Date(),"validacion fallida", errores);
