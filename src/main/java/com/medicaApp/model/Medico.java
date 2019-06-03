@@ -18,10 +18,15 @@ public class Medico {
 	
 	@Column(nullable = false, length = 70)
 	private String nombres;
+	
 	@Column(nullable = false, length = 70)
 	private String apellidos;
+	
 	@Column(nullable = false, length = 12)
 	private String CMP;
+	
+	
+	
 	public Integer getIdMedico() {
 		return idMedico;
 	}

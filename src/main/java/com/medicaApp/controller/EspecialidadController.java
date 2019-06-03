@@ -22,37 +22,37 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.medicaApp.exceptions.ModeloNotFoundException;
-import com.medicaApp.model.Paciente;
-import com.medicaApp.service.IPacienteService;
+import com.medicaApp.model.Especialidad;
+import com.medicaApp.service.IEspecialidadService;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/pacientes")
-public class PacienteController {
+@RequestMapping("/especialidades")
+public class EspecialidadController {
 
 	@Autowired
-	IPacienteService servicio;
+	IEspecialidadService servicio;
 
 	@GetMapping
-	public ResponseEntity<List<Paciente>> listar(){		
-		return new ResponseEntity< List<Paciente> >(servicio.listar(),HttpStatus.OK);
+	public ResponseEntity<List<Especialidad>> listar(){		
+		return new ResponseEntity< List<Especialidad> >(servicio.listar(),HttpStatus.OK);
 	}
 
 
 	//	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(method=RequestMethod.GET,value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public Resource<Paciente> listarPorId(@PathVariable("id") Integer id){
+	public Resource<Especialidad> listarPorId(@PathVariable("id") Integer id){
 
-		Paciente pac = servicio.listarPorId(id);
+		Especialidad pac = servicio.listarPorId(id);
 
 		if (pac == null) {
 			//tipo de error personalizado
 			throw new ModeloNotFoundException("Id no encontrado" + id);
 		}
 
-		Resource<Paciente> resource = new Resource<Paciente>(pac);
+		Resource<Especialidad> resource = new Resource<Especialidad>(pac);
 		//  /pacientes/{id}   <- va a ese recurso y le pone el id
 		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).listarPorId(id));
 		//agregar el link al recurso
@@ -63,12 +63,12 @@ public class PacienteController {
 
 	//	@PostMapping
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Paciente> registrar(@Valid @RequestBody Paciente pac) {
+	public ResponseEntity<Especialidad> registrar(@Valid @RequestBody Especialidad pac) {
 
-		Paciente pacSaved = servicio.registrar(pac);
+		Especialidad pacSaved = servicio.registrar(pac);
 		//devuelve id
 		URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest().
-				path("/{id}").buildAndExpand(pacSaved.getIdPaciente()).toUri();
+				path("/{id}").buildAndExpand(pacSaved.getIdEspecialidad()).toUri();
 
 		return ResponseEntity.created(uriLocation).build();
 	}
@@ -87,7 +87,7 @@ public class PacienteController {
 
 	//	@PutMapping
 	@RequestMapping(method=RequestMethod.PUT)
-	public Paciente modificar(@RequestBody Paciente pac) {
+	public Especialidad modificar(@RequestBody Especialidad pac) {
 		return servicio.modificar(pac);
 	}
 

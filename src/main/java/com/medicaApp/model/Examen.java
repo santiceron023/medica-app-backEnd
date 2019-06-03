@@ -39,6 +39,9 @@ public class Examen {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

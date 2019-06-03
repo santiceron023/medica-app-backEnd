@@ -13,17 +13,17 @@ public class Especialidad {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	private Integer idMedico;
+	private Integer idEspecialidad;
 	
 	@Column(nullable = false, length = 50)
 	private String nombre;
 
-	public Integer getIdMedico() {
-		return idMedico;
+	public Integer getIdEspecialidad() {
+		return idEspecialidad;
 	}
 
-	public void setIdMedico(Integer idMedico) {
-		this.idMedico = idMedico;
+	public void setIdEspecialidad(Integer idMedico) {
+		this.idEspecialidad = idMedico;
 	}
 
 	public String getNombre() {

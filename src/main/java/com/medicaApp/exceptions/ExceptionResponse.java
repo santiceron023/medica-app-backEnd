@@ -2,6 +2,7 @@ package com.medicaApp.exceptions;
 
 import java.util.Date;
 
+//estructura de mensage de error a enviar por rest
 public class ExceptionResponse {
 	
 	private Date timeStamp;

@@ -21,7 +21,7 @@ public class DetalleConsulta {
 	private Integer idDetalle;
 
 	@JsonIgnore
-	//una consulta muchos detalles
+	//* detalles tiene 1 consulta
 	@ManyToOne
 	@JoinColumn(name = "id_consulta", nullable = false, foreignKey = @ForeignKey(name = "detalle_consulta"))
 	private Consulta consulta;

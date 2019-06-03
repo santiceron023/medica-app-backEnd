@@ -1,12 +1,14 @@
 package com.medicaApp.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,35 +24,42 @@ public class ConsultaController {
 	@Autowired
 	IConsultaService servicio;
 
-	@PostMapping
+	//@PostMapping
 	//un solo Json
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Paciente> registrar(@RequestBody ConsultaListaExamenDto cons) {
-		//	public ResponseEntity<Paciente> registrar(@RequestBody Consulta cons) {
 
 		Consulta conSaved = servicio.registrarTransaccional(cons);
-		//		Consulta conSaved = servicio.registrar(cons);
 
-		//original + id 
+		//id creado
 		URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(conSaved.getIdConsulta()).toUri();
 
 		return ResponseEntity.created(uriLocation).build();
 	}
-	
-	@PostMapping
-	@RequestMapping("/listaExamen")
-	//un solo Json
+
+
+
+	//	@PostMapping
+	@RequestMapping(value = "/listaExamen",method = RequestMethod.POST)
 	public ResponseEntity<Paciente> registrarListaExamen(@RequestBody Consulta cons) {
-		//	public ResponseEntity<Paciente> registrar(@RequestBody Consulta cons) {
 
 		Consulta conSaved = servicio.registrar(cons);
 
-		//original + id 
+		//id creado
 		URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(conSaved.getIdConsulta()).toUri();
 
 		return ResponseEntity.created(uriLocation).build();
 	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> getConsultas() {
+
+		return new ResponseEntity<>(servicio.listar(), HttpStatus.OK);
+
+	}
+
 
 
 

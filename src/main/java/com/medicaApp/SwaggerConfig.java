@@ -17,16 +17,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-	
-	public static final Contact contacto = new Contact("Santago Ceron", "https://www.google.com", "Santiceron023@gmail.com");
-	public static final ApiInfo info = new ApiInfo("Medica App", "BackEnd app Medica", "version 1.0", 
-			"termsOfServiceUrl",contacto, " uso educativo, APACHE 2.0"," http://www.apache.com", 
-			new ArrayList<VendorExtension>());
-	
-@Bean
-public Docket api() {
-	
-return new Docket(DocumentationType.SWAGGER_2).apiInfo(info);
-//		.select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
-}
+
+	public static final Contact contacto = new Contact("Santago Ceron", 
+			"https://www.google.com", "Santiceron023@gmail.com");
+	public static final ApiInfo info = new ApiInfo("Medica App", "BackEnd app Medica",
+			"version 1.0", "termsOfServiceUrl",contacto, " uso educativo, APACHE 2.0",
+			" http://www.apache.com",new ArrayList<VendorExtension>());
+
+	@Bean
+	public Docket api() {
+
+		return new Docket(DocumentationType.SWAGGER_2).apiInfo(info)
+				.select().apis(RequestHandlerSelectors.basePackage
+						("com.medicaApp.controller")).paths(PathSelectors.any())
+				.build();
+	}
 }

@@ -8,14 +8,15 @@ import javax.persistence.IdClass;
 @IdClass(ConsultaExamenPk.class)
 public class ConsultaExamen {
 
-	
-	//llave compuesta y primaria,se recomienda usar otra clase qu define los ids
+
+	//llave compuesta y primaria,se recomienda usar otra clase que define como
+	//	son las llaves
 	@Id
 	private Consulta consulta;
 	@Id
 	private Examen examen;
-	
-	
+
+
 	public Examen getExamen() {
 		return examen;
 	}
@@ -28,5 +29,5 @@ public class ConsultaExamen {
 	public void setConsulta(Consulta consulta) {
 		this.consulta = consulta;
 	}
-	
+
 }

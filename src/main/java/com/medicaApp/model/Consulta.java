@@ -26,51 +26,78 @@ public class Consulta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idConsulta;
-	
-	//un paciente muchas consultas
+
+	//1 paciente * consultas
+	//1 consulta 1 paceiente
+
+	//* consultas 1 paciente, llave en el que es Many
 	@ManyToOne
-	//muchas consultas puede tener un paciente
 	@JoinColumn(name = "id_paciente",nullable= false, foreignKey = @ForeignKey(name = "consulta_paciente") )
 	private Paciente paciente;
-	
+
 	@ManyToOne
 	//nombre de la columna
 	@JoinColumn(name = "id_medico",nullable= false, foreignKey = @ForeignKey(name = "consulta_medico") )
 	private Medico medico;
-	
+
 	@ManyToOne
-	//freingkey es para noombre del cnsrain
+	//foreignKey -> nombre constrain
 	@JoinColumn(name = "id_especialidad",nullable= false, foreignKey = @ForeignKey(name = "consulta_especialidad"))
 	private Especialidad especialidad;
-	//para recibir lista de detalle consulta
-	//mapeo bidireccional solo en maestro detalle
-	//no se agrega a base de datos, porq tiene maped by
-	
-	
-	
-	
+
+
+
 	//dar formato a la fecha  ISODate 2019-10-01T05:00:00.000
 	@JsonSerialize(using = ToStringSerializer.class)
 	private LocalDateTime fecha;
 
-	
-	
-	
-	
-	//fetch lazy para que no traiga la consulta, si le pongo eager tre todos los detales
+
+
+
+	//Lista detalle consulta en un mismo JSON
 	@OneToMany(mappedBy="consulta",cascade = {CascadeType.PERSIST,
 			CascadeType.MERGE,CascadeType.REMOVE},fetch=FetchType.LAZY
 			,orphanRemoval = false)
-	//cascade para que padre cree al hijo
-	//nombre del que mapea a consulta en detalleconsulta(atr de java)
+
 	private List<DetalleConsulta> detalleConsulta;
-	
-	//orphan permite eliminar elementos del detalle
-	
-	
+	//MAPEO BIDIRECCIONAL -> solo en maestro detalle
+	//mapped by -> llave (nombre de atr Java) que refiere a este modelo en el detalle, NO agrega campo en DB
+	//fetch -> lazy, en consultas JDBC no tare la lista poblada, para más velocidad
+	//cascade -> Padre crea al hijo
+	//orphan -> permite que los hijos se eliminen
+
+
+
 	public List<DetalleConsulta> getDetalleConsulta() {
 		return detalleConsulta;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idConsulta == null) ? 0 : idConsulta.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Consulta other = (Consulta) obj;
+		if (idConsulta == null) {
+			if (other.idConsulta != null)
+				return false;
+		} else if (!idConsulta.equals(other.idConsulta))
+			return false;
+		return true;
+	}
+
+
 
 	public void setDetalleConsulta(List<DetalleConsulta> detalleConsulta) {
 		this.detalleConsulta = detalleConsulta;

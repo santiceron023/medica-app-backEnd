@@ -8,16 +8,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-//searilizable se agrega en entities nrmalmente pero en ésta no
-@Embeddable
 //para usarla en defnicion de otra cosa
+@Embeddable 
 public class ConsultaExamenPk implements Serializable {
+//searilizable <- se agrega auto en @entities, pero en clase normal NO
 	
-	@JoinColumn(name="idExamen", nullable = false,foreignKey = @ForeignKey(name="consulta_examen") )
+	@JoinColumn(name="idExamen", nullable = false,foreignKey = @ForeignKey(name="conEx_examen") )
 	@ManyToOne
 	private Examen examen;
 	
-	@JoinColumn(name="idConsulta", nullable = false,foreignKey = @ForeignKey(name="examen_consulta") )
+	@JoinColumn(name="idConsulta", nullable = false,foreignKey = @ForeignKey(name="conEx_consulta") )
 	@ManyToOne
 	private Consulta consulta;
 

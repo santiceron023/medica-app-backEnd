@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,27 +35,27 @@ public class ExamenController {
 	@Autowired
 	IExamenService servicio;
 
-	@GetMapping
+	//	@GetMapping
+	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Examen>> listar(){		
 		return new ResponseEntity< List<Examen> >(servicio.listar(),HttpStatus.OK);
 	}
 
-	//hateoas---> devolver la consutarealizada
-	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	//	hateoas --> la respuesta trae info de acceso a recursos,
+	//	en este caso será la url consultada
+//	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method=RequestMethod.GET,value="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public Resource<Examen> listarPorId(@PathVariable("id") Integer id){
 
-		Examen exa = servicio.listarPorId(id);
+		Examen exaSaved = servicio.listarPorId(id);
 
-		if (exa == null) {
-			//tipo de error personalizado
+		if (exaSaved == null) {
+			//mi error creado
 			throw new ModeloNotFoundException("Id no encontrado" + id);
 		}
-		//		else {
-		//			return new ResponseEntity<Examen>(exa,HttpStatus.OK);
-		//		}
 
-		Resource<Examen> resource = new Resource<Examen>(exa);
-		//  /Examens/   <--clase , uso el metodo busca la url y escribe el id
+		Resource<Examen> resource = new Resource<>(exaSaved);
+		//  /Examenes/{id}   <- va a ese recurso y le pone el id
 		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).listarPorId(id));
 		//agregar el link al recurso
 		resource.add(linkTo.withRel("Examen-resource"));
@@ -63,11 +64,12 @@ public class ExamenController {
 		return resource;
 	}
 
-	@PostMapping
+	//	@PostMapping
+	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Examen> registrar(@Valid @RequestBody Examen exa) {
 
 		Examen exaSaved = servicio.registrar(exa);
-		//original + id 
+		//devolver id
 		URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(exaSaved.getIdExamen()).toUri();
 
@@ -75,7 +77,8 @@ public class ExamenController {
 	}
 
 
-	@DeleteMapping(value = "/{id}")
+	//	@DeleteMapping(value = "/{id}")
+	@RequestMapping(method=RequestMethod.DELETE,value="/{id}")
 	public void eliminarPorId(@PathVariable("id") Integer id){
 
 		if(servicio.listarPorId(id) != null) {
@@ -86,7 +89,8 @@ public class ExamenController {
 	}
 
 
-	@PutMapping
+	//	@PutMapping
+	@RequestMapping(method=RequestMethod.PUT)
 	public Examen modificar(@RequestBody Examen exa) {
 		return servicio.modificar(exa);
 	}

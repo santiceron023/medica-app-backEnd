@@ -10,7 +10,6 @@ public class ConsultaListaExamenDto {
 	private Consulta consulta;
 	private List<Examen> examenList;
 	
-	
 	public Consulta getConsulta() {
 		return consulta;
 	}

@@ -2,6 +2,8 @@ package com.medicaApp.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +18,33 @@ public class IConsultaServiceImpl implements IConsultaService {
 
 	@Autowired
 	IConsultaExamenDao conExaDao;
-	
+
 	@Autowired
-	IConsultaDao dao;
-	
-	
+	IConsultaDao conDao;
+
+
 	//consultaExamen
 	@Override
 	public Consulta registrar(Consulta con) { 
 		con.getDetalleConsulta().forEach(detalle -> detalle.setConsulta(con) );
-		return dao.save(con);
+		return conDao.save(con);
 	}
-	
-	@SuppressWarnings("unused")
+
+
 	@Override
+	@Transactional 
+	//Transaccional -> si hay un error en alguna entidad, hace roolback de todo
 	public Consulta registrarTransaccional(ConsultaListaExamenDto dto) { 
-		
+
 		dto.getConsulta().getDetalleConsulta().forEach(
 				detalle -> detalle.setConsulta(dto.getConsulta()) 
 				);
-		Consulta conSaved = dao.save(dto.getConsulta());
-		
-		
-		//consulta exmaen , es 1 objeto formado de 2 obj llave compuesta
-		dto.getExamenList().forEach(
-				e -> conExaDao.registrar(dto.getConsulta().getIdConsulta(), e.getIdExamen())
-				);
-		
+		conDao.save(dto.getConsulta());
+		//insertar cada examen de la consulta(Ya creada)
+		dto.getExamenList().forEach(ex -> conExaDao.registrar(
+				dto.getConsulta().getIdConsulta(),ex.getIdExamen() )
+				);	
+
 		return dto.getConsulta();
 	}
 
@@ -56,13 +58,12 @@ public class IConsultaServiceImpl implements IConsultaService {
 	@Override
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public List<Consulta> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return conDao.findAll();
 	}
 
 	@Override
