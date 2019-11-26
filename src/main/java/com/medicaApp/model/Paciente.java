@@ -26,7 +26,7 @@ public class Paciente {
 	
 	@Column(nullable = false, length = 8)
 	@ApiModelProperty(notes ="maximo 8 caracteres" )
-	@Size(min=3,message = "dni minimo 3 caracteres")
+	@Size(min=3,max=8,message = "dni 3-8 caracteres")
 	private String dni;
 	
 	@Column(nullable = false, length = 70)
@@ -39,7 +39,7 @@ public class Paciente {
 	private String apellidos;
 	
 	@Column(nullable = true, length = 9)
-	@Size(min=3,message = "telefono minimo 3 caracteres")
+	@Size(min=3,max=9,message = "telefono 3-9 caracteres")
 	private String telefono;
 	
 	@Column(nullable = true, length = 55)

@@ -5,11 +5,14 @@ import org.springframework.hateoas.ResourceSupport;
 import com.medicaApp.model.Medico;
 import com.medicaApp.model.Paciente;
 
+//resource support para usar hipermedia
 public class ConsultaDto extends ResourceSupport {
 
 	private int idConsulta;
 	private Medico medico;
 	private Paciente pac;
+	
+	
 	public int getIdConsulta() {
 		return idConsulta;
 	}

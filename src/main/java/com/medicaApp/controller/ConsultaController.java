@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.medicaApp.dto.ConsultaDto;
 import com.medicaApp.dto.ConsultaListaExamenDto;
+import com.medicaApp.dto.FiltroConsultaDto;
 import com.medicaApp.model.Consulta;
 import com.medicaApp.model.Paciente;
 import com.medicaApp.service.IConsultaService;
@@ -100,7 +103,18 @@ public class ConsultaController {
 	public ResponseEntity<?> listarPorId(@PathVariable int id) {
 		return new ResponseEntity<>(servicio.listarPorId(id), HttpStatus.OK);
 	}
-
+	
+	@PostMapping(value = "buscar")
+	public ResponseEntity<List<Consulta>>FiltroBuscar(@RequestBody FiltroConsultaDto filtro){
+		List<Consulta> consultas;
+		if( filtro.getFechaConsulta() != null) {
+			consultas = servicio.buscarFecha(filtro);
+		}else {
+			consultas = servicio.buscar(filtro);
+		}
+		return new ResponseEntity<>(consultas,HttpStatus.OK);
+		
+	}
 
 
 

@@ -16,6 +16,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+//para spring security, orden de filtros que se levantan
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORS implements Filter {
 

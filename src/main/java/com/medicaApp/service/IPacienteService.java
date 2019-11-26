@@ -1,8 +1,12 @@
 package com.medicaApp.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.medicaApp.model.Paciente;
 
 public interface IPacienteService extends ICRUD<Paciente> {
 
-//	List<Paciente> listarPacientePorNombre();
+	Page<Paciente> listarPageable(Pageable pageable);
+	
 }

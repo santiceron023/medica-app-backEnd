@@ -3,6 +3,8 @@ package com.medicaApp.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.medicaApp.dao.IConsultaExamenDao;
@@ -44,6 +46,11 @@ public class PacienteServiceImpl implements IPacienteService{
 	@Override
 	public Paciente listarPorId(Integer id) {
 		return pacienteDao.findOne(id);
+	}
+
+	@Override
+	public Page<Paciente> listarPageable(Pageable pageable) {
+		return pacienteDao.findAll(pageable);
 	}
 
 }
