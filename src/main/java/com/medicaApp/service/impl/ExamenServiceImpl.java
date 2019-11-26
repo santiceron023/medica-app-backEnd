@@ -14,7 +14,7 @@ public class ExamenServiceImpl implements IExamenService{
 	
 	@Autowired
 	IExamenDao examenDao;
-	
+	 
 	@Override
 	public Examen registrar(Examen t) {		
 		return examenDao.save(t);

@@ -30,7 +30,7 @@ public class Consulta {
 	//1 paciente * consultas
 	//1 consulta 1 paceiente
 
-	//* consultas 1 paciente, llave en el que es Many
+	//* consultas 1 paciente, llave en el que es Many=]]
 	@ManyToOne
 	@JoinColumn(name = "id_paciente",nullable= false, foreignKey = @ForeignKey(name = "consulta_paciente") )
 	private Paciente paciente;

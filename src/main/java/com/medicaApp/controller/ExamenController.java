@@ -51,7 +51,7 @@ public class ExamenController {
 
 		if (exaSaved == null) {
 			//mi error creado
-			throw new ModeloNotFoundException("Id no encontrado" + id);
+			throw new ModeloNotFoundException("Id no encontrado : " + id);
 		}
 
 		Resource<Examen> resource = new Resource<>(exaSaved);
@@ -84,7 +84,7 @@ public class ExamenController {
 		if(servicio.listarPorId(id) != null) {
 			servicio.eliminar(id);
 		}else {
-			throw new ModeloNotFoundException("ïs no encontrado" + id);
+			throw new ModeloNotFoundException("ïs no encontrado : " + id);
 		}
 	}
 

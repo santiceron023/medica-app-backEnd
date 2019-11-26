@@ -49,7 +49,7 @@ public class EspecialidadController {
 
 		if (pac == null) {
 			//tipo de error personalizado
-			throw new ModeloNotFoundException("Id no encontrado" + id);
+			throw new ModeloNotFoundException("Id no encontrado : " + id);
 		}
 
 		Resource<Especialidad> resource = new Resource<Especialidad>(pac);
@@ -81,7 +81,7 @@ public class EspecialidadController {
 		if(servicio.listarPorId(id) != null) {
 			servicio.eliminar(id);
 		}else {
-			throw new ModeloNotFoundException("ïs no encontrado" + id);
+			throw new ModeloNotFoundException("ïs no encontrado : " + id);
 		}
 	}
 

@@ -50,7 +50,7 @@ public class MedicoController {
 
 		if (pac == null) {
 			//tipo de error personalizado
-			throw new ModeloNotFoundException("Id no encontrado" + id);
+			throw new ModeloNotFoundException("Id no encontrado : " + id);
 		}
 
 		Resource<Medico> resource = new Resource<Medico>(pac);
@@ -82,7 +82,7 @@ public class MedicoController {
 		if(servicio.listarPorId(id) != null) {
 			servicio.eliminar(id);
 		}else {
-			throw new ModeloNotFoundException("ïs no encontrado" + id);
+			throw new ModeloNotFoundException("ïs no encontrado : " + id);
 		}
 	}
 

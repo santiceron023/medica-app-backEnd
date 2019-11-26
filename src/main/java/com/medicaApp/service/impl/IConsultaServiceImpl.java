@@ -68,8 +68,7 @@ public class IConsultaServiceImpl implements IConsultaService {
 
 	@Override
 	public Consulta listarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return conDao.findOne(id);
 	}
 
 

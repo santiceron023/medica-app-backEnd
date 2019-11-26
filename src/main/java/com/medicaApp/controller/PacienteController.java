@@ -49,7 +49,7 @@ public class PacienteController {
 
 		if (pac == null) {
 			//tipo de error personalizado
-			throw new ModeloNotFoundException("Id no encontrado" + id);
+			throw new ModeloNotFoundException("Id no encontrado : " + id);
 		}
 
 		Resource<Paciente> resource = new Resource<Paciente>(pac);
@@ -66,8 +66,9 @@ public class PacienteController {
 	public ResponseEntity<Paciente> registrar(@Valid @RequestBody Paciente pac) {
 
 		Paciente pacSaved = servicio.registrar(pac);
-		//devuelve id
+		//@RequestMapping("/pacientes")
 		URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest().
+				//devuelve id
 				path("/{id}").buildAndExpand(pacSaved.getIdPaciente()).toUri();
 
 		return ResponseEntity.created(uriLocation).build();
@@ -81,12 +82,12 @@ public class PacienteController {
 		if(servicio.listarPorId(id) != null) {
 			servicio.eliminar(id);
 		}else {
-			throw new ModeloNotFoundException("ïs no encontrado" + id);
+			throw new ModeloNotFoundException("ïs no encontrado : " + id);
 		}
 	}
 
 	//	@PutMapping
-	@RequestMapping(method=RequestMethod.PUT)
+	@RequestMapping(method=RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
 	public Paciente modificar(@RequestBody Paciente pac) {
 		return servicio.modificar(pac);
 	}

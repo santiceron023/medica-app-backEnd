@@ -21,20 +21,20 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 
 	//tipo de error manejado <-- tipo que creee
 	@ExceptionHandler(ModeloNotFoundException.class)
-	public final ResponseEntity<Object> manejarModeloExcepciones(ModeloNotFoundException ex, WebRequest request){
+	public final ResponseEntity<ExceptionResponse> manejarModeloExcepciones(ModeloNotFoundException ex, WebRequest request){
 
 		ExceptionResponse excepResp = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity(excepResp, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ExceptionResponse>(excepResp, HttpStatus.NOT_FOUND);
 	}
 
 
-	//para todas las excepciones
+	//para todas las otras excepciones
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> manejarTodasExcepciones(Exception ex, WebRequest request){
 
 		//clase que hice
 		ExceptionResponse excepResp = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity(excepResp, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<Object>(excepResp, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 
@@ -51,7 +51,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		}
 
 		ExceptionResponse excepResp = new ExceptionResponse(new Date(),"validacion fallida", errores);
-		return new ResponseEntity(excepResp, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Object>(excepResp, HttpStatus.BAD_REQUEST);
 	}
 
 
