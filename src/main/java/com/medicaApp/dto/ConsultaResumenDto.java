@@ -3,7 +3,7 @@ package com.medicaApp.dto;
 public class ConsultaResumenDto {
 	
 	String fecha;
-	String cantidad;
+	Integer cantidad;
 	
 	public String getFecha() {
 		return fecha;
@@ -11,12 +11,14 @@ public class ConsultaResumenDto {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getCantidad() {
+	public Integer getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(String cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+
 	
 
 }

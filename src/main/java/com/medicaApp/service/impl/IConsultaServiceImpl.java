@@ -1,5 +1,6 @@
 package com.medicaApp.service.impl;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,17 +8,21 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.medicaApp.dao.IConsultaDao;
 import com.medicaApp.dao.IConsultaExamenDao;
-import com.medicaApp.dto.ConsultaDto;
 import com.medicaApp.dto.ConsultaListaExamenDto;
 import com.medicaApp.dto.ConsultaResumenDto;
 import com.medicaApp.dto.FiltroConsultaDto;
 import com.medicaApp.model.Consulta;
-import com.medicaApp.model.DetalleConsulta;
 import com.medicaApp.service.IConsultaService;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class IConsultaServiceImpl implements IConsultaService {
@@ -98,16 +103,32 @@ public class IConsultaServiceImpl implements IConsultaService {
 
 
 	@Override
-	public List<ConsultaResumenDto> listarExamen() {
+	public List<ConsultaResumenDto> listarResumen() {
 		List<ConsultaResumenDto> consulta = new ArrayList<ConsultaResumenDto>();
 		
 		conDao.listarResumen().forEach( x -> {
 			ConsultaResumenDto item = new ConsultaResumenDto();
-			item.setCantidad((String) x[0]);
+			item.setCantidad((int) x[0] );
 			item.setFecha((String) x[1]);
 			consulta.add(item);
 		});
 		return consulta;
+	}
+
+
+	@Override
+	public byte[] generarReporte() {
+		byte[] data= null;
+		try {
+			File file = new ClassPathResource("/reports/consultas.jasper").getFile();
+			JasperPrint print = JasperFillManager.fillReport(file.getPath(),
+					null, new JRBeanCollectionDataSource(this.listarResumen()));
+			data = JasperExportManager.exportReportToPdf(print);
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return data;
 	}
 
 

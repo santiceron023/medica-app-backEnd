@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -85,7 +87,7 @@ public class ConsultaController {
 							.getIdMedico()) );
 			//nombre del campo link
 			dto.add(linkTo2.withRel("medico-url"));
-//			consultasDto.add(dto);
+			//			consultasDto.add(dto);
 
 			ControllerLinkBuilder linkTo3 = 
 					linkTo(methodOn(PacienteController.class).listarPorId(dto.getPac()
@@ -93,7 +95,7 @@ public class ConsultaController {
 			dto.add(linkTo3.withSelfRel());
 			consultasDto.add(dto);
 		}
-		
+
 		return new ResponseEntity<List<ConsultaDto>>(consultasDto, HttpStatus.OK);
 
 	}
@@ -103,7 +105,7 @@ public class ConsultaController {
 	public ResponseEntity<?> listarPorId(@PathVariable int id) {
 		return new ResponseEntity<>(servicio.listarPorId(id), HttpStatus.OK);
 	}
-	
+
 	@PostMapping(value = "buscar")
 	public ResponseEntity<List<Consulta>>FiltroBuscar(@RequestBody FiltroConsultaDto filtro){
 		List<Consulta> consultas;
@@ -113,9 +115,24 @@ public class ConsultaController {
 			consultas = servicio.buscar(filtro);
 		}
 		return new ResponseEntity<>(consultas,HttpStatus.OK);
-		
+
+	}
+
+	@RequestMapping(method = RequestMethod.GET,value="/listarResumen")
+	public ResponseEntity<?> listarResumen() {
+		return new ResponseEntity<>(servicio.listarResumen(), HttpStatus.OK);
 	}
 
 
-
+	@GetMapping(value = "/generarReporte", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public byte[] generarReporte() {
+		byte data[] = null;
+		data= servicio.generarReporte();
+		return data;
+	}
 }
+
+
+
+

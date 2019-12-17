@@ -20,9 +20,9 @@ public interface IConsultaDao extends JpaRepository<Consulta, Integer>{
 	List<Consulta> buscar(@Param("fechaConsulta") LocalDateTime fechaConsulta,@Param("fechaSgte") LocalDateTime fechaSgte);
 	
 	
-	//cantidad Fecha
+	//cantidad Fecha --------PROCEDIMIENTO ALMACENADO------------
 	//[2, 10/20/1993]
-	@Query(value="select * from get_listarResumen()",nativeQuery = true)
+	@Query(value="select * from fn_listarResumen()",nativeQuery = true)
 	List<Object[]> listarResumen();
 
 
