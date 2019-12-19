@@ -26,12 +26,11 @@ public class MedicaAppBackEndApplicationTests {
 	public void crearUsuario() {
 		Usuario us = new Usuario();
 		us.setIdUsuario(2);
-		us.setUsername("santiago");
+		us.setUsername("carolina");
 		us.setEnabled(true);
-		us.setPassword(bcrypt.encode("123"));
-		
-		Usuario retorno =  dao.save(us);
-		
+		us.setPassword(bcrypt.encode("123"));		
+		Usuario retorno =  dao.save(us);		
+		// db vs obj
 		assertTrue(retorno.getPassword().equalsIgnoreCase(us.getPassword()) );
 	}
 	

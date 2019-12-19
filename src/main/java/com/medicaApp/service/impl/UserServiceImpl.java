@@ -33,17 +33,14 @@ public class UserServiceImpl implements UserDetailsService{
 			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
 		}
 		
-		//permisos de usuario, DBA, USER, ADMIN
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		
+		//---------------------Lista de roles de clase Sprin por medio de NOMBRE
+		List<GrantedAuthority> authorities = new ArrayList<>();		
 		//SIEMORE POBLADA EAGEER
 		usuario.getRoles().forEach( rol -> {
 			authorities.add(new SimpleGrantedAuthority(rol.getNombre()));
 		});
-		
-		//tipo usuario spring
-		UserDetails userDetails = new User(usuario.getUsername(), usuario.getPassword(), authorities);
-		
+		//tipo user spring
+		UserDetails userDetails = new User(usuario.getUsername(),usuario.getPassword(),authorities);		
 		return userDetails;
 	}
 

@@ -35,6 +35,7 @@ public class Usuario {
 	joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario")
 	//referenciando a otra trava
 	, inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
+	
 	private List<Rol> roles;	
 	/////////////////////////////////
 

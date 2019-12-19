@@ -1,7 +1,5 @@
 package com.medicaApp;
 
-import javax.security.auth.message.AuthException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 @Configuration
+//oauth
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
@@ -29,12 +28,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
                 http
-                //mensaje de error personalizao
+                //Err MSG personalizado
                 .exceptionHandling().authenticationEntryPoint(new com.medicaApp.exceptions.AuthException())
                 .and()
                 .requestMatchers()
+                //qué protege
                 .and()
-                //los quqe stán protegidos
                 .authorizeRequests()
                 .antMatchers("/v2/api-docs/**" ).authenticated()
                 .antMatchers("/consultas/**" ).authenticated()                

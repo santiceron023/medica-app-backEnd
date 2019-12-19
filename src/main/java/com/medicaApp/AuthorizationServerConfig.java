@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 @Configuration
+//oauth
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter  {
 
@@ -37,32 +38,39 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private String resourceIds;
 
 	
+	//-----------beans del conf
 	@Autowired
 	private TokenStore tokenStore;
-
 	@Autowired
 	private JwtAccessTokenConverter accessTokenConverter;
-
 	@Autowired
 	private AuthenticationManager authenticationManager;	
-
+	//-----------beans del conf
 	
 	
+	//-----------ciclo de vida token
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-		configurer.inMemory().withClient(clientId).secret(clientSecret).authorizedGrantTypes(grantType)
-				.scopes(scopeRead, scopeWrite).resourceIds(resourceIds).accessTokenValiditySeconds(20)
-				.refreshTokenValiditySeconds(0);
+		configurer.inMemory()
+			.withClient(clientId).secret(clientSecret).authorizedGrantTypes(grantType)
+			.scopes(scopeRead, scopeWrite).resourceIds(resourceIds)
+			//puede ser de DB
+			.accessTokenValiditySeconds(4000)
+			//expira se debe solcitar otro
+			.refreshTokenValiditySeconds(0);
 	}	
 
-	///dfdsfdsf.dfdfsdfdsf.dfsdfdsfdsfd
+	
+	//----------- Estructura token, alcance
 	//nombre usuario, expiración....id 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+		
 		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
-		endpoints.tokenStore(tokenStore).accessTokenConverter(accessTokenConverter).tokenEnhancer(enhancerChain)
-				.authenticationManager(authenticationManager);
+		endpoints.tokenStore(tokenStore).accessTokenConverter(accessTokenConverter)
+		.tokenEnhancer(enhancerChain)
+		.authenticationManager(authenticationManager);
 	}
 
 }

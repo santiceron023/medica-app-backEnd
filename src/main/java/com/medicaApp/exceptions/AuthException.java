@@ -23,6 +23,7 @@ public class AuthException implements AuthenticationEntryPoint {
 			throws IOException, ServletException {
 		final Map<String, Object> mapException = new HashMap<>();
 
+		//campos JSON
 		mapException.put("error", "401");
 		mapException.put("message", "No estas autorizado para acceder a este recurso");
 		mapException.put("exception", "No autorizado");

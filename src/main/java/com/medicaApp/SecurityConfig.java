@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 
-
+//CONFIGURACION SPRING SECURITY
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${security.signing-key}")
@@ -38,82 +38,84 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${security.security-realm}")
 	private String securityRealm;
-	
-	//base de datos
+
+	//DB( del properties)
 	@Autowired
 	private DataSource datasource;
-	
-	
-	//tablas de usuario y roles. clase de spring
+
+	//Tablas usuario/rol. Propia de Spring
 	@Autowired	
 	private UserDetailsService userDetailsService;
-	
-	
-	//encriptar claves, ahcer un hash
-	@Autowired
-	private BCryptPasswordEncoder bcrypt;
-	
-	
-	//para poder usar el autowired, se intancia!!
+
+
+	// -------------------Hash de passWords 
+	//Para poder usar Esta función! (AUTOWIRED necesita instancia)
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
+		return new BCryptPasswordEncoder();
 	}
-	
-	//calse a sobreeescribir del padre. 
-	// donde están mecanizmos de autenticacion de spring security
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
+	//-------------------Hash de passWords 
+
+
+
+	//------------------ Mecanismo de AUTH
 	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-	
-	
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userDetailsService).passwordEncoder(bcrypt);
 	}
-	
-	
-	//con figuraación de http
+	//------------------ Mecanismo de AUTH
+
+
+
+	//------------------ Conf HTTP
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http	
-		//la sesion NOO se guarda en el servidor, requ token
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        
-        //valro descriptivo de la descripción
-        .and()
-        .httpBasic()
-        .realmName(securityRealm)
-        
-        //token por defecto NO
-        .and()
-        .csrf()
-        .disable();        
+		//Req token. sesion NO en servidor
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+		//Apodo Petición
+		.and()
+		.httpBasic()
+		.realmName(securityRealm)
+
+		//Desabilit tonken SPRING predef
+		.and()
+		.csrf()
+		.disable();        
 	}
-	
-	
-	///GESTION CREACION DE TOKENS!!!!!
-	
-	//instancia del token
+	//------------------ Conf HTTP
+
+
+
+	///-------------------------GESTION CREACION DE TOKENS!!!!!
+
+	//Instancia del TOKEN
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 		converter.setSigningKey(signingKey);		
 		return converter;
 	}
-	
+
+	//Instancia Dónde está token	
 	@Bean
 	public TokenStore tokenStore() {
+		//instancia del de arriba
 		return new JwtTokenStore(accessTokenConverter());
-//		return new JdbcTokenStore(this.datasource);
+		//return new JdbcTokenStore(this.datasource);
 	}
-	
-	
-	//primero 
+
+
+	//Intancia de gest TOKEN primero 
 	@Bean
 	@Primary
 	public DefaultTokenServices tokenServices() {
@@ -123,10 +125,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		defaultTokenServices.setReuseRefreshToken(false);	
 		return defaultTokenServices;
 	}
+	
+	///-------------------------GESTION CREACION DE TOKENS!!!!!
 
-	
-	
-	
-	
-	
+
 }
