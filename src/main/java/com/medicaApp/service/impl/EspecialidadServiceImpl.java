@@ -11,7 +11,7 @@ import com.medicaApp.service.IEspecialidadService;
 
 
 @Service
-public class IEspecialidadServiceImpl implements IEspecialidadService{
+public class EspecialidadServiceImpl implements IEspecialidadService{
 
 
 	@Autowired

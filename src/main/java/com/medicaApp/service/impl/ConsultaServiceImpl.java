@@ -25,7 +25,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
-public class IConsultaServiceImpl implements IConsultaService {
+public class ConsultaServiceImpl implements IConsultaService {
 
 	@Autowired
 	IConsultaExamenDao conExaDao;
