@@ -37,7 +37,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Value("${security.jwt.resource-ids}")
 	private String resourceIds;
 
-	
+
 	//-----------beans del conf
 	@Autowired
 	private TokenStore tokenStore;
@@ -46,27 +46,27 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;	
 	//-----------beans del conf
-	
-	
+
+
 	//-----------ciclo de vida token
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer.inMemory()
-			.withClient(clientId).secret(clientSecret).authorizedGrantTypes(grantType)
-			.scopes(scopeRead, scopeWrite).resourceIds(resourceIds)
-			//puede ser de DB
-			.accessTokenValiditySeconds(4000)
-			//expira se debe solcitar otro
-			.refreshTokenValiditySeconds(0);
+		.withClient(clientId).secret(clientSecret).authorizedGrantTypes(grantType)
+		.scopes(scopeRead, scopeWrite).resourceIds(resourceIds)
+		//puede ser de DB
+		.accessTokenValiditySeconds(200)
+		//expira se debe solcitar otro
+		.refreshTokenValiditySeconds(0);
 	}	
 
-	
+
 	//----------- Estructura token, alcance
 	//nombre usuario, expiración....id 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-		
+
 		enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
 		endpoints.tokenStore(tokenStore).accessTokenConverter(accessTokenConverter)
 		.tokenEnhancer(enhancerChain)
