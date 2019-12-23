@@ -1,5 +1,6 @@
 package com.medicaApp.exceptions;
 
+import java.io.IOException;
 import java.util.Date;
 
 import org.springframework.http.HttpHeaders;

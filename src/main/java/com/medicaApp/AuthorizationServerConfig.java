@@ -55,7 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.withClient(clientId).secret(clientSecret).authorizedGrantTypes(grantType)
 		.scopes(scopeRead, scopeWrite).resourceIds(resourceIds)
 		//puede ser de DB
-		.accessTokenValiditySeconds(200)
+		.accessTokenValiditySeconds(600)
 		//expira se debe solcitar otro
 		.refreshTokenValiditySeconds(0);
 	}	

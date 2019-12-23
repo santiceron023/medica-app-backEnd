@@ -10,8 +10,8 @@ import com.medicaApp.model.Usuario;
 
 public interface ILoginDao extends JpaRepository<Usuario, Integer>{
 	
-	@Query("select from Usuario u where u.username = :userName")
-	Usuario verificarUsarioPorNombre(@Param(value = "userName") String userName);
+	@Query("FROM Usuario u where u.username = :nombre")
+	Usuario verificarUsarioPorNombre(@Param(value = "nombre") String userName);
 	
 	@Transactional
 	@Modifying//porque es mod SQL DML

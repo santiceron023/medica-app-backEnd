@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medicaApp.model.ResetToken;
 import com.medicaApp.model.Usuario;
 import com.medicaApp.service.ILoginService;
-import com.medicaApp.service.impl.IResetTokenService;
+import com.medicaApp.service.IResetTokenService;
 import com.medicaApp.util.EmailService;
 import com.medicaApp.util.Mail;
 
@@ -43,8 +43,8 @@ public class LoginController {
 	
 	//ya que el servicio no recibe JSon!!
 	@PostMapping(value = "/enviarCorreo", consumes = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<Integer> enviarCorreo(@RequestBody String correo) {
-		int rpta = 0;
+	public ResponseEntity<String> enviarCorreo(@RequestBody String correo) {
+		String rpta = "0";
 		try {
 			Usuario us = service.verificarNombreUsuario(correo);
 			if(us != null && us.getIdUsuario() > 0) {
@@ -52,41 +52,44 @@ public class LoginController {
 				ResetToken token = new ResetToken();
 				token.setToken(UUID.randomUUID().toString());//56465454
 				token.setUsuario(us);
-				token.setExpiracion(2);
+				token.setExpiracion(10);
 				tokenService.guardar(token);
 
 				Mail mail = new Mail();				
-				mail.setFrom("laReap@spring.com");
+				mail.setFrom("MedicaApp@spring.com");
 				mail.setTo("santiceron023@gmail.com");
 				mail.setSubject("Recuperar Contraseña MedicaApp");
 				
 				////JAVA COLLECTION AND MAP!!!!!!!!!
 				Map<String,Object> model = new HashMap<>();
-				String url = "http://localhost:4565/recuperar/" + token.getToken();
+				String url = "http://localhost:4200/recuperar/" + token.getToken();
 				model.put("user", token.getUsuario().getUsername());
 				model.put("resetUrl", url);
 				mail.setModel(model);
-				
-				this.emailService.sendEmail(mail);				
-				rpta=1;			
+				try {
+					this.emailService.sendEmail(mail);				
+					rpta="1";								
+				} catch (Exception e) {
+					rpta = token.getToken();
+				}
 			}
 			//de más especifica a más general
 		} catch (Exception e) {
-			return new ResponseEntity<Integer>(rpta, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>(rpta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
+		return new ResponseEntity<String>(rpta, HttpStatus.OK);
 
 	}
 
-	@GetMapping(value = "/restablecer/verificar/{token}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/restablecer/verificar/{token:.*}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Integer> restablecerClave(@PathVariable("token") String token) {
 		int rpta = 0;
 		try {
 			if (token != null && !token.isEmpty()) {
-				ResetToken rt = tokenService.findByToken(token);
-				if (rt != null && rt.getId() > 0) {
-					if (!rt.isExpirado()) {
+				ResetToken reseytToken = tokenService.findByToken(token);
+				if (reseytToken != null && reseytToken.getId() > 0) {
+					if (!reseytToken.isExpirado()) {
 						rpta = 1;
 					}
 				}
@@ -97,13 +100,13 @@ public class LoginController {
 		return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/restablecer/{token}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
+	@PostMapping(value = "/restablecer/{token:.*}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<Integer> restablecerClave(@PathVariable("token") String token, @RequestBody String clave) {
 		int rpta = 0;
 		try {
 			ResetToken rt = tokenService.findByToken(token);
 			String claveHash = bcrypt.encode(clave);
-			rpta = service.cambiarClave(claveHash, rt.getUsuario().getUsername());
+			rpta = service.CambiarClave(claveHash, rt.getUsuario().getUsername());
 			tokenService.eliminar(rt);
 		} catch (Exception e) {
 			return new ResponseEntity<Integer>(rpta, HttpStatus.INTERNAL_SERVER_ERROR);

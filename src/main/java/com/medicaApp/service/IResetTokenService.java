@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaApp.service;
 
 import com.medicaApp.model.ResetToken;
 
