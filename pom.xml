@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>MedicaApp-backEnd</artifactId>
-	<version>0.7</version>
-	<name>MedicaApp-backEnd</name>
+	<artifactId>medicaApp</artifactId>
+	<version>0.75</version>
+	<name>medicaAppBackEnd</name>
 	<description>Aplicacion Médica</description>
 	<!-- PARA DESPLIEGUE -->
 	<packaging>war</packaging>
@@ -130,6 +130,9 @@
 	</dependencies>
 
 	<build>
+
+		<finalName>${project.artifactId}</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -143,6 +146,19 @@
 			<!-- <groupId>org.sonarsource.scanner.maven</groupId> -->
 			<!-- <artifactId>sonar-maven-plugin</artifactId> -->
 			<!-- <version>3.4.0.905</version> -->
+			<!-- </plugin> -->
+
+
+			<!-- despliegue dentro del war -->
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-war-plugin</artifactId> -->
+			<!-- <configuration> -->
+			<!-- <webResources> -->
+			<!-- <resource> -->
+			<!-- <directory>/src/mediapp-frontend</directory> -->
+			<!-- </resource> -->
+			<!-- </webResources> -->
+			<!-- </configuration> -->
 			<!-- </plugin> -->
 
 		</plugins>
