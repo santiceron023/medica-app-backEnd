@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -41,6 +42,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	//INI-CAMBIO PARA SPRING BOOT 2
 	//https://stackoverflow.com/questions/49197111/migration-to-spring-boot-2-security-encoded-password-does-not-look-like-bcrypt
 	@Autowired
+	@Lazy
 	private BCryptPasswordEncoder bcrypt;
 	//FIN-CAMBIO PARA SPRING BOOT 2
 
