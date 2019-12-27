@@ -1,9 +1,12 @@
 package com.medicaApp.service.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.medicaApp.dao.IExamenDao;
+import com.medicaApp.model.Consulta;
 import com.medicaApp.model.Examen;
 import com.medicaApp.service.IExamenService;
 
@@ -27,7 +30,7 @@ public class ExamenServiceImpl implements IExamenService{
 
 	@Override
 	public void eliminar(Integer id) {
-		examenDao.delete(id);		
+		examenDao.deleteById(id);		
 	}
 
 	@Override
@@ -37,7 +40,8 @@ public class ExamenServiceImpl implements IExamenService{
 
 	@Override
 	public Examen listarPorId(Integer id) {		
-		return examenDao.findOne(id);
+		Optional<Examen> opt = examenDao.findById(id);
+		return opt.isPresent() ? opt.get() : new Examen();
 	}
 
 }

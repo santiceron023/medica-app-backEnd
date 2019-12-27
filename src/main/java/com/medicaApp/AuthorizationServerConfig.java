@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -37,6 +38,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Value("${security.jwt.resource-ids}")
 	private String resourceIds;
 
+	//INI-CAMBIO PARA SPRING BOOT 2
+	//https://stackoverflow.com/questions/49197111/migration-to-spring-boot-2-security-encoded-password-does-not-look-like-bcrypt
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
+	//FIN-CAMBIO PARA SPRING BOOT 2
+
 
 	//-----------beans del conf
 	@Autowired
@@ -52,7 +59,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer.inMemory()
-		.withClient(clientId).secret(clientSecret).authorizedGrantTypes(grantType)
+		//INI-CAMBIO PARA SPRING BOOT 2 secret(clientSecret) => secret(bcrypt.encode(clientSecret)		
+		.withClient(clientId).secret(bcrypt.encode(clientSecret)).authorizedGrantTypes(grantType)
+		//FIN-CAMBIO PARA SPRING BOOT 2
+		
 		.scopes(scopeRead, scopeWrite).resourceIds(resourceIds)
 		//puede ser de DB
 		.accessTokenValiditySeconds(600)

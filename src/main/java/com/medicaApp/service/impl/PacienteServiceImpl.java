@@ -1,6 +1,7 @@
 package com.medicaApp.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,7 @@ public class PacienteServiceImpl implements IPacienteService{
 
 	@Override
 	public void eliminar(Integer id) {
-		pacienteDao.delete(id);
+		pacienteDao.deleteById(id);
 
 	}
 
@@ -45,7 +46,8 @@ public class PacienteServiceImpl implements IPacienteService{
 
 	@Override
 	public Paciente listarPorId(Integer id) {
-		return pacienteDao.findOne(id);
+		Optional<Paciente> opt = pacienteDao.findById(id);
+		return opt.isPresent() ? opt.get() : new Paciente();
 	}
 
 	@Override

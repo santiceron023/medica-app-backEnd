@@ -1,5 +1,7 @@
 package com.medicaApp.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,8 @@ public class ArchivoServiceImpl implements IArchivoService{
 
 	@Override
 	public byte[] leerArchivo(Integer idArchivo) {
-		return dao.findOne(idArchivo).getValue();
+		Optional<Archivo> opt = dao.findById(idArchivo);
+		return opt.isPresent() ? opt.get().getValue() : new Archivo().getValue();
 	}
 
 

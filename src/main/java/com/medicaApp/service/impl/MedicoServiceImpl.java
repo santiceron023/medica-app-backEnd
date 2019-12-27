@@ -1,6 +1,7 @@
 package com.medicaApp.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class MedicoServiceImpl implements IMedicoService{
 
 	@Override
 	public void eliminar(Integer id) {
-		medicoDao.delete(id);
+		medicoDao.deleteById(id);
 
 	}
 
@@ -39,7 +40,9 @@ public class MedicoServiceImpl implements IMedicoService{
 
 	@Override
 	public Medico listarPorId(Integer id) {
-		return medicoDao.findOne(id);
+		Optional<Medico> opt = medicoDao.findById(id);
+		return opt.isPresent() ? opt.get() : new Medico();
+				
 	}
 
 }

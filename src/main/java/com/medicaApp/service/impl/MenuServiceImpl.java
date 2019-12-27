@@ -2,11 +2,13 @@ package com.medicaApp.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medicaApp.dao.IMenuDAO;
+import com.medicaApp.model.Medico;
 import com.medicaApp.model.Menu;
 import com.medicaApp.service.IMenuService;
 
@@ -28,12 +30,13 @@ public class MenuServiceImpl implements IMenuService {
 
 	@Override
 	public void eliminar(Integer idMenu) {
-		dao.delete(idMenu);
+		dao.deleteById(idMenu);
 	}
 
 	@Override
 	public Menu listarPorId(Integer idMenu) {
-		return dao.findOne(idMenu);
+		Optional<Menu> opt = dao.findById(idMenu);
+		return opt.isPresent() ? opt.get() : new Menu();
 	}
 
 	@Override

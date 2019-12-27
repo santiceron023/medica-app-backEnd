@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -83,7 +84,8 @@ public class ConsultaServiceImpl implements IConsultaService {
 
 	@Override
 	public Consulta listarPorId(Integer id) {
-		return conDao.findOne(id);
+		Optional<Consulta> opt = conDao.findById(id);
+		return opt.isPresent() ? opt.get() : new Consulta();
 	}
 
 
