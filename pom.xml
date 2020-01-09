@@ -7,7 +7,6 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<!-- <version>1.5.20.RELEASE</version> -->
-
 		<!-- SRPING BOOT 2 -->
 		<version>2.1.11.RELEASE</version>
 
