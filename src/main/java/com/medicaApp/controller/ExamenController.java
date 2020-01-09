@@ -1,4 +1,4 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 import java.net.URI;
 import java.util.List;
 
@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.medicaApp.exceptions.ModeloNotFoundException;
-import com.medicaApp.model.Examen;
-import com.medicaApp.service.IExamenService;
+import com.medicaapp.exceptions.ModeloNotFoundException;
+import com.medicaapp.model.Examen;
+import com.medicaapp.service.IExamenService;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -35,16 +34,14 @@ public class ExamenController {
 	@Autowired
 	IExamenService servicio;
 
-	//	@GetMapping
-	@RequestMapping(method=RequestMethod.GET)
+	@GetMapping
 	public ResponseEntity<List<Examen>> listar(){		
 		return new ResponseEntity< List<Examen> >(servicio.listar(),HttpStatus.OK);
 	}
 
 	//	hateoas --> la respuesta trae info de acceso a recursos,
 	//	en este caso será la url consultada
-//	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(method=RequestMethod.GET,value="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public Resource<Examen> listarPorId(@PathVariable("id") Integer id){
 
 		Examen exaSaved = servicio.listarPorId(id);
@@ -64,8 +61,7 @@ public class ExamenController {
 		return resource;
 	}
 
-	//	@PostMapping
-	@RequestMapping(method=RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<Examen> registrar(@Valid @RequestBody Examen exa) {
 
 		Examen exaSaved = servicio.registrar(exa);
@@ -77,8 +73,7 @@ public class ExamenController {
 	}
 
 
-	//	@DeleteMapping(value = "/{id}")
-	@RequestMapping(method=RequestMethod.DELETE,value="/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void eliminarPorId(@PathVariable("id") Integer id){
 
 		if(servicio.listarPorId(id) != null) {
@@ -89,8 +84,7 @@ public class ExamenController {
 	}
 
 
-	//	@PutMapping
-	@RequestMapping(method=RequestMethod.PUT)
+	@PutMapping
 	public Examen modificar(@RequestBody Examen exa) {
 		return servicio.modificar(exa);
 	}

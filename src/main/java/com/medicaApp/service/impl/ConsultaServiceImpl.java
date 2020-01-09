@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.IConsultaDao;
-import com.medicaApp.dao.IConsultaExamenDao;
-import com.medicaApp.dto.ConsultaListaExamenDto;
-import com.medicaApp.dto.ConsultaResumenDto;
-import com.medicaApp.dto.FiltroConsultaDto;
-import com.medicaApp.model.Consulta;
-import com.medicaApp.service.IConsultaService;
+import com.medicaapp.dao.IConsultaDao;
+import com.medicaapp.dao.IConsultaExamenDao;
+import com.medicaapp.dto.ConsultaListaExamenDto;
+import com.medicaapp.dto.ConsultaResumenDto;
+import com.medicaapp.dto.FiltroConsultaDto;
+import com.medicaapp.model.Consulta;
+import com.medicaapp.service.IConsultaService;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;

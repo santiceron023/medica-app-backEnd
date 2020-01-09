@@ -1,6 +1,6 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import com.medicaApp.model.Archivo;
+import com.medicaapp.model.Archivo;
 
 public interface IArchivoService {
 	int guardar(Archivo archivo);

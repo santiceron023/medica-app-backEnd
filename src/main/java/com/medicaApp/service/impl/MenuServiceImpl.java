@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.IMenuDAO;
-import com.medicaApp.model.Medico;
-import com.medicaApp.model.Menu;
-import com.medicaApp.service.IMenuService;
+import com.medicaapp.dao.IMenuDAO;
+import com.medicaapp.model.Menu;
+import com.medicaapp.service.IMenuService;
 
 @Service
 public class MenuServiceImpl implements IMenuService {

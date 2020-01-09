@@ -1,6 +1,6 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import com.medicaApp.model.Examen;
+import com.medicaapp.model.Examen;
 
 public interface IExamenService extends ICRUD<Examen> {
 

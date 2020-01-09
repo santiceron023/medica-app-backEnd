@@ -1,9 +1,9 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.medicaApp.model.SignosVitales;
+import com.medicaapp.model.SignosVitales;
 
 public interface ISignosVitalesService extends ICRUD<SignosVitales>{
 

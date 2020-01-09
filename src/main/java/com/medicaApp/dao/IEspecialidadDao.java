@@ -1,13 +1,9 @@
-package com.medicaApp.dao;
+package com.medicaapp.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.medicaApp.model.Especialidad;
-import com.medicaApp.model.Medico;
-import com.medicaApp.model.Paciente;
+import com.medicaapp.model.Especialidad;
 
 @Repository
 public interface IEspecialidadDao extends JpaRepository<Especialidad,Integer>{
-
 }

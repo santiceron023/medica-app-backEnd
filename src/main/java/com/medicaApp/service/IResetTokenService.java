@@ -1,6 +1,6 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import com.medicaApp.model.ResetToken;
+import com.medicaapp.model.ResetToken;
 
 public interface IResetTokenService {
 	

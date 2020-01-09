@@ -1,4 +1,4 @@
-package com.medicaApp;
+package com.medicaapp;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(info)
 				.select().apis(RequestHandlerSelectors.basePackage
-						("com.medicaApp.controller")).paths(PathSelectors.any())
+						("com.medicaapp.controller")).paths(PathSelectors.any())
 				.build();
 	}
 }

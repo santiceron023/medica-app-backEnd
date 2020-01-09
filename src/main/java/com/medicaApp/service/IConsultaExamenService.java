@@ -1,9 +1,9 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
 
 import java.util.List;
 
-import com.medicaApp.model.ConsultaExamen;
+import com.medicaapp.model.ConsultaExamen;
 
 
 public interface IConsultaExamenService{

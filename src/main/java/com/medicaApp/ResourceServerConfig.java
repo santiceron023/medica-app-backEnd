@@ -1,4 +1,4 @@
-package com.medicaApp;
+package com.medicaapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
                 http
                 //Err MSG personalizado
-                .exceptionHandling().authenticationEntryPoint(new com.medicaApp.exceptions.AuthException())
+                .exceptionHandling().authenticationEntryPoint(new com.medicaapp.exceptions.NoAuthorizationResponse())
                 .and()
                 .requestMatchers()
                 //qué protege

@@ -1,4 +1,4 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.medicaApp.model.ResetToken;
-import com.medicaApp.model.Usuario;
-import com.medicaApp.service.ILoginService;
-import com.medicaApp.service.IResetTokenService;
-import com.medicaApp.util.EmailService;
-import com.medicaApp.util.Mail;
+import com.medicaapp.model.ResetToken;
+import com.medicaapp.model.Usuario;
+import com.medicaapp.service.ILoginService;
+import com.medicaapp.service.IResetTokenService;
+import com.medicaapp.util.EmailService;
+import com.medicaapp.util.Mail;
 
 
 @RestController
@@ -91,6 +91,8 @@ public class LoginController {
 				if (reseytToken != null && reseytToken.getId() > 0) {
 					if (!reseytToken.isExpirado()) {
 						rpta = 1;
+					}else {
+						rpta=0;
 					}
 				}
 			}
@@ -106,7 +108,7 @@ public class LoginController {
 		try {
 			ResetToken rt = tokenService.findByToken(token);
 			String claveHash = bcrypt.encode(clave);
-			rpta = service.CambiarClave(claveHash, rt.getUsuario().getUsername());
+			rpta = service.cambiarClave(claveHash, rt.getUsuario().getUsername());
 			tokenService.eliminar(rt);
 		} catch (Exception e) {
 			return new ResponseEntity<Integer>(rpta, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,6 +1,6 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import com.medicaApp.model.Especialidad;
+import com.medicaapp.model.Especialidad;
 
 public interface IEspecialidadService extends ICRUD<Especialidad> {
 

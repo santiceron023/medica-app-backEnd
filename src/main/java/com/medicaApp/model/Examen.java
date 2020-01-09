@@ -1,4 +1,4 @@
-package com.medicaApp.model;
+package com.medicaapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,8 +61,9 @@ public class Examen {
 		if (idExamen == null) {
 			if (other.idExamen != null)
 				return false;
-		} else if (!idExamen.equals(other.idExamen))
+		} else if (!idExamen.equals(other.idExamen)) {
 			return false;
+		}
 		return true;
 	}
 	

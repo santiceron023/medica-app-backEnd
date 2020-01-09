@@ -1,4 +1,4 @@
-package com.medicaApp;
+package com.medicaapp;
 
 import java.util.Arrays;
 

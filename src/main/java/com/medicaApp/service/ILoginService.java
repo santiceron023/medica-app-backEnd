@@ -1,10 +1,10 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import com.medicaApp.model.Usuario;
+import com.medicaapp.model.Usuario;
 
 public interface ILoginService {
 	
-	Usuario verificarNombreUsuario(String Username) throws Exception;
-	int CambiarClave(String clave, String nombre) throws Exception;
+	Usuario verificarNombreUsuario(String username) throws Exception;
+	int cambiarClave(String clave, String nombre) throws Exception;
 
 }

@@ -1,4 +1,4 @@
-package com.medicaApp.model;
+package com.medicaapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ public class Medico {
 	private String apellidos;
 	
 	@Column(nullable = false, length = 12)
-	private String CMP;
+	private String cmp;
 	
 	
 	
@@ -46,10 +46,10 @@ public class Medico {
 		this.apellidos = apellidos;
 	}
 	public String getCMP() {
-		return CMP;
+		return cmp;
 	}
 	public void setCMP(String cMP) {
-		CMP = cMP;
+		cmp = cMP;
 	}
 	
 		

@@ -13,9 +13,9 @@
 
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>medicaApp</artifactId>
-	<version>0.8</version>
+	<groupId>com.sfc</groupId>
+	<artifactId>medicaapp</artifactId>
+	<version>0.9</version>
 	<name>medicaAppBackEnd</name>
 	<description>Aplicacion Médica</description>
 	<!-- PARA DESPLIEGUE -->
@@ -147,9 +147,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				 <configuration>    
+                <mainClass>com.medicaapp.medicaAppBackEndApplication</mainClass>
+            </configuration>
 			</plugin>
-
-
 
 			<!-- sonar qube -->
 			<!-- <plugin> -->
@@ -159,17 +160,17 @@
 			<!-- </plugin> -->
 
 
-			<!-- despliegue dentro del war -->
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>/src/main/MediApp</directory>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
+			<!-- despliegue FRONT dentro del war -->
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-war-plugin</artifactId> -->
+			<!-- <configuration> -->
+			<!-- <webResources> -->
+			<!-- <resource> -->
+			<!-- <directory>/src/main/MediApp</directory> -->
+			<!-- </resource> -->
+			<!-- </webResources> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 
 		</plugins>
 	</build>

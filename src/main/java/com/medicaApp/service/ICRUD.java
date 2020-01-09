@@ -1,4 +1,4 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
 import java.util.List;
 

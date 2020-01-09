@@ -1,14 +1,14 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.medicaApp.dao.IExamenDao;
-import com.medicaApp.model.Consulta;
-import com.medicaApp.model.Examen;
-import com.medicaApp.service.IExamenService;
+
+import com.medicaapp.dao.IExamenDao;
+import com.medicaapp.model.Examen;
+import com.medicaapp.service.IExamenService;
 
 
 @Service

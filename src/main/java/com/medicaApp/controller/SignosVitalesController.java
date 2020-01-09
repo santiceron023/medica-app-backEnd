@@ -1,7 +1,6 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.medicaApp.model.SignosVitales;
-import com.medicaApp.service.ISignosVitalesService;
+import com.medicaapp.model.SignosVitales;
+import com.medicaapp.service.ISignosVitalesService;
 
 @RestController
 @RequestMapping("/signos")

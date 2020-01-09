@@ -1,15 +1,10 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
-import org.springframework.data.repository.query.Param;
-
-import com.medicaApp.dto.ConsultaListaExamenDto;
-import com.medicaApp.dto.ConsultaResumenDto;
-import com.medicaApp.dto.FiltroConsultaDto;
-import com.medicaApp.model.Consulta;
-
+import com.medicaapp.dto.ConsultaListaExamenDto;
+import com.medicaapp.dto.ConsultaResumenDto;
+import com.medicaapp.dto.FiltroConsultaDto;
+import com.medicaapp.model.Consulta;
 
 public interface IConsultaService extends ICRUD<Consulta> {
 

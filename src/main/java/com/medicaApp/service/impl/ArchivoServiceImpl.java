@@ -1,13 +1,13 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.IArchivoDao;
-import com.medicaApp.model.Archivo;
-import com.medicaApp.service.IArchivoService;
+import com.medicaapp.dao.IArchivoDao;
+import com.medicaapp.model.Archivo;
+import com.medicaapp.service.IArchivoService;
 
 @Service
 public class ArchivoServiceImpl implements IArchivoService{

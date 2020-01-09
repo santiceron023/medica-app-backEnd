@@ -1,10 +1,11 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.medicaApp.dao.IResetTokenDAO;
-import com.medicaApp.model.ResetToken;
-import com.medicaApp.service.IResetTokenService;
+
+import com.medicaapp.dao.IResetTokenDAO;
+import com.medicaapp.model.ResetToken;
+import com.medicaapp.service.IResetTokenService;
 
 @Service
 public class ResetTokenService implements IResetTokenService {

@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,10 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.IConsultaExamenDao;
-import com.medicaApp.dao.IPacienteDao;
-import com.medicaApp.model.Paciente;
-import com.medicaApp.service.IPacienteService;
+import com.medicaapp.dao.IConsultaExamenDao;
+import com.medicaapp.dao.IPacienteDao;
+import com.medicaapp.model.Paciente;
+import com.medicaapp.service.IPacienteService;
 
 @Service
 public class PacienteServiceImpl implements IPacienteService{

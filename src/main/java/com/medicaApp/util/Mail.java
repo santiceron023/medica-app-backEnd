@@ -1,4 +1,4 @@
-package com.medicaApp.util;
+package com.medicaapp.util;
 
 import java.util.Map;
 

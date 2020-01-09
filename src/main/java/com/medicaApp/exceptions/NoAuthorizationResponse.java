@@ -1,4 +1,4 @@
-package com.medicaApp.exceptions;
+package com.medicaapp.exceptions;
 
 import java.io.IOException;
 import java.util.Date;
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 //hay que implementar esa interfaz
-public class AuthException implements AuthenticationEntryPoint {
+public class NoAuthorizationResponse implements AuthenticationEntryPoint {
 	
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException arg2)

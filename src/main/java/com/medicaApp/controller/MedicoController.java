@@ -1,4 +1,4 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -14,17 +14,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.medicaApp.exceptions.ModeloNotFoundException;
-import com.medicaApp.model.Medico;
-import com.medicaApp.service.IMedicoService;
+import com.medicaapp.exceptions.ModeloNotFoundException;
+import com.medicaapp.model.Medico;
+import com.medicaapp.service.IMedicoService;
 
 @RestController
 @RequestMapping("/medicos")
@@ -61,8 +63,7 @@ public class MedicoController {
 		return resource;
 	}
 
-	//	@PostMapping
-	@RequestMapping(method=RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<Medico> registrar(@Valid @RequestBody Medico pac) {
 
 		Medico pacSaved = servicio.registrar(pac);
@@ -74,8 +75,7 @@ public class MedicoController {
 	}
 
 
-	//	@DeleteMapping(value = "/{id}")
-	@RequestMapping(method=RequestMethod.DELETE,value = "/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void eliminarPorId(@PathVariable("id") Integer id){
 
 		if(servicio.listarPorId(id) != null) {
@@ -85,8 +85,7 @@ public class MedicoController {
 		}
 	}
 
-	//	@PutMapping
-	@RequestMapping(method=RequestMethod.PUT)
+	@PutMapping	
 	public Medico modificar(@RequestBody Medico pac) {
 		return servicio.modificar(pac);
 	}

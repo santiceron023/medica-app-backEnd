@@ -1,9 +1,6 @@
-package com.medicaApp.model;
+package com.medicaapp.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;

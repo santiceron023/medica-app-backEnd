@@ -1,23 +1,23 @@
-package com.medicaApp;
+package com.medicaapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-//import org.springframework.boot.web.support.SpringBootServletInitializer;
+//ya no es requerido: org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class MedicaAppBackEndApplication extends SpringBootServletInitializer{
+public class medicaAppBackEndApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication.run(MedicaAppBackEndApplication.class, args);
+		SpringApplication.run(medicaAppBackEndApplication.class, args);
 	}
 
 	
 	//para generar war
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder appBuilder) {
-		return appBuilder.sources(MedicaAppBackEndApplication.class);
+		return appBuilder.sources(medicaAppBackEndApplication.class);
 	}
 	
 	

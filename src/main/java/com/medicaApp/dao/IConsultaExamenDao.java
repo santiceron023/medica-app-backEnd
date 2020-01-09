@@ -1,4 +1,4 @@
-package com.medicaApp.dao;
+package com.medicaapp.dao;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.medicaApp.model.ConsultaExamen;
+import com.medicaapp.model.ConsultaExamen;
 
 public interface IConsultaExamenDao extends JpaRepository<ConsultaExamen, Integer>{
 

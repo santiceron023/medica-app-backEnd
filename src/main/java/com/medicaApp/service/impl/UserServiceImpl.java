@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.IUsuarioDAO;
-import com.medicaApp.model.Usuario;
+import com.medicaapp.dao.IUsuarioDAO;
+import com.medicaapp.model.Usuario;
 
 
 
@@ -30,15 +30,16 @@ public class UserServiceImpl implements UserDetailsService{
 		Usuario usuario = userDAO.findOneByUsername(username); //from usuario where username := username
 
 		if (usuario == null) {
-			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
+			throw new UsernameNotFoundException(String.format("Usuario no existe %s", username));
 		}
 		
 		//---------------------Lista de roles de clase Sprin por medio de NOMBRE
 		List<GrantedAuthority> authorities = new ArrayList<>();		
 		//SIEMORE POBLADA EAGEER
-		usuario.getRoles().forEach( rol -> {
-			authorities.add(new SimpleGrantedAuthority(rol.getNombre()));
-		});
+		usuario.getRoles().forEach( rol -> 
+			authorities.add(
+					new SimpleGrantedAuthority(rol.getNombre()))
+		);
 		//tipo user spring
 		UserDetails userDetails = new User(usuario.getUsername(),usuario.getPassword(),authorities);		
 		return userDetails;

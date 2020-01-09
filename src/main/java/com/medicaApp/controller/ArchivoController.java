@@ -1,4 +1,4 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.medicaApp.model.Archivo;
-import com.medicaApp.service.IArchivoService;
+import com.medicaapp.model.Archivo;
+import com.medicaapp.service.IArchivoService;
 
 @RestController
 @RequestMapping("/archivo")

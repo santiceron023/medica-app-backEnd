@@ -1,9 +1,9 @@
-package com.medicaApp.dto;
+package com.medicaapp.dto;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import com.medicaApp.model.Medico;
-import com.medicaApp.model.Paciente;
+import com.medicaapp.model.Medico;
+import com.medicaapp.model.Paciente;
 
 //resource support para usar hipermedia
 public class ConsultaDto extends ResourceSupport {

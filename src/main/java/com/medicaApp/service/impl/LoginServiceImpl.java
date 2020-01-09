@@ -1,11 +1,11 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.ILoginDao;
-import com.medicaApp.model.Usuario;
-import com.medicaApp.service.ILoginService;
+import com.medicaapp.dao.ILoginDao;
+import com.medicaapp.model.Usuario;
+import com.medicaapp.service.ILoginService;
 
 @Service
 public class LoginServiceImpl implements ILoginService{
@@ -14,14 +14,14 @@ public class LoginServiceImpl implements ILoginService{
 	private ILoginDao loginDao;
 
 	@Override
-	public Usuario verificarNombreUsuario(String Username) throws Exception {
-		Usuario usuario =  loginDao.verificarUsarioPorNombre(Username);
+	public Usuario verificarNombreUsuario(String userName) throws Exception {
+		Usuario usuario =  loginDao.verificarUsarioPorNombre(userName);
 		usuario = (usuario != null) ? usuario : new Usuario();
 		return usuario;
 	}
 
 	@Override
-	public int CambiarClave(String clave, String nombre) throws Exception {
+	public int cambiarClave(String clave, String nombre) throws Exception {
 		int rta = 0;
 		try {
 			this.loginDao.cambiarClave(clave, nombre);

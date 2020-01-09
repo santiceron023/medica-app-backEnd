@@ -1,12 +1,12 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.medicaApp.dao.IConsultaExamenDao;
-import com.medicaApp.model.ConsultaExamen;
-import com.medicaApp.service.IConsultaExamenService;
+import com.medicaapp.dao.IConsultaExamenDao;
+import com.medicaapp.model.ConsultaExamen;
+import com.medicaapp.service.IConsultaExamenService;
 	
 public class ConsultaExamenExamenServiceImpl implements IConsultaExamenService {
 	

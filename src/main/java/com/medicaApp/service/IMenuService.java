@@ -1,8 +1,8 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
 import java.util.List;
 
-import com.medicaApp.model.Menu;
+import com.medicaapp.model.Menu;
 
 public interface IMenuService extends ICRUD<Menu>{
 	

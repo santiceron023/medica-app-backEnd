@@ -1,4 +1,4 @@
-package com.medicaApp.model;
+package com.medicaapp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

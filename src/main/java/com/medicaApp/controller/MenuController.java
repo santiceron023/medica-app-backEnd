@@ -1,4 +1,4 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.medicaApp.model.Menu;
-import com.medicaApp.service.IMenuService;
+import com.medicaapp.model.Menu;
+import com.medicaapp.service.IMenuService;
 
 @RestController
 @RequestMapping("/menus")

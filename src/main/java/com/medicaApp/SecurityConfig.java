@@ -1,4 +1,4 @@
-package com.medicaApp;
+package com.medicaapp;
 
 import javax.sql.DataSource;
 
@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
 
 @Configuration
 @EnableWebSecurity
@@ -68,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManager();
 	}
 	@Autowired
+	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userDetailsService).passwordEncoder(bcrypt);
 	}
@@ -111,7 +112,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public TokenStore tokenStore() {
 		//instancia del de arriba
-//		return new JwtTokenStore(accessTokenConverter());
+		//la otra opc: JwtTokenStore(accessTokenConverter());
 		return new JdbcTokenStore(this.datasource);
 	}
 
@@ -126,7 +127,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		defaultTokenServices.setReuseRefreshToken(false);	
 		return defaultTokenServices;
 	}
-	
+
 	///-------------------------GESTION CREACION DE TOKENS!!!!!
 
 

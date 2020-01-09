@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.IMedicoDao;
-import com.medicaApp.model.Medico;
-import com.medicaApp.service.IMedicoService;
+import com.medicaapp.dao.IMedicoDao;
+import com.medicaapp.model.Medico;
+import com.medicaapp.service.IMedicoService;
 
 @Service
 public class MedicoServiceImpl implements IMedicoService{

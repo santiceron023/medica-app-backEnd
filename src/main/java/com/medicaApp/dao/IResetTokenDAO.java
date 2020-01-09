@@ -1,8 +1,8 @@
-package com.medicaApp.dao;
+package com.medicaapp.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.medicaApp.model.ResetToken;
+import com.medicaapp.model.ResetToken;
 
 public interface IResetTokenDAO extends JpaRepository<ResetToken, Long> {
 

@@ -1,4 +1,4 @@
-package com.medicaApp;
+package com.medicaapp;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.medicaApp.dao.IUsuarioDAO;
-import com.medicaApp.model.Usuario;
+import com.medicaapp.dao.IUsuarioDAO;
+import com.medicaapp.model.Usuario;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,9 +1,9 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.medicaApp.model.Paciente;
+import com.medicaapp.model.Paciente;
 
 public interface IPacienteService extends ICRUD<Paciente> {
 

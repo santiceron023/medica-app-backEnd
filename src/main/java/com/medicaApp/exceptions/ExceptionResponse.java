@@ -1,4 +1,4 @@
-package com.medicaApp.exceptions;
+package com.medicaapp.exceptions;
 
 import java.util.Date;
 

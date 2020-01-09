@@ -1,9 +1,9 @@
-package com.medicaApp.dto;
+package com.medicaapp.dto;
 
 import java.util.List;
 
-import com.medicaApp.model.Consulta;
-import com.medicaApp.model.Examen;
+import com.medicaapp.model.Consulta;
+import com.medicaapp.model.Examen;
 
 public class ConsultaListaExamenDto {
 

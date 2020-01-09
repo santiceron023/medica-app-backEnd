@@ -1,4 +1,4 @@
-package com.medicaApp.dto;
+package com.medicaapp.dto;
 
 public class ConsultaResumenDto {
 	

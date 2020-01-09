@@ -1,4 +1,4 @@
-package com.medicaApp.exceptions;
+package com.medicaapp.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

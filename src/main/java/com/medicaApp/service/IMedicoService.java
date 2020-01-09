@@ -1,6 +1,6 @@
-package com.medicaApp.service;
+package com.medicaapp.service;
 
-import com.medicaApp.model.Medico;
+import com.medicaapp.model.Medico;
 
 public interface IMedicoService extends ICRUD<Medico> {
 

@@ -1,4 +1,4 @@
-package com.medicaApp.dao;
+package com.medicaapp.dao;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.medicaApp.model.SignosVitales;
+import com.medicaapp.model.SignosVitales;
 
 public interface ISignosVitalesDao extends JpaRepository<SignosVitales, Integer> {
 

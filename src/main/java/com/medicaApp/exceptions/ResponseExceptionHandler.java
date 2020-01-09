@@ -1,8 +1,6 @@
-package com.medicaApp.exceptions;
+package com.medicaapp.exceptions;
 
-import java.io.IOException;
 import java.util.Date;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

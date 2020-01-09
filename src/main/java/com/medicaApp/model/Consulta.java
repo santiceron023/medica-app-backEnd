@@ -1,4 +1,4 @@
-package com.medicaApp.model;
+package com.medicaapp.model;
 
 import java.time.LocalDateTime;
 import java.util.List;

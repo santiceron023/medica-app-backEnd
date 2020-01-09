@@ -1,4 +1,4 @@
-package com.medicaApp.controller;
+package com.medicaapp.controller;
 import java.net.URI;
 import java.util.List;
 
@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.medicaApp.exceptions.ModeloNotFoundException;
-import com.medicaApp.model.Especialidad;
-import com.medicaApp.service.IEspecialidadService;
+import com.medicaapp.exceptions.ModeloNotFoundException;
+import com.medicaapp.model.Especialidad;
+import com.medicaapp.service.IEspecialidadService;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -41,8 +40,7 @@ public class EspecialidadController {
 	}
 
 
-	//	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(method=RequestMethod.GET,value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public Resource<Especialidad> listarPorId(@PathVariable("id") Integer id){
 
 		Especialidad pac = servicio.listarPorId(id);
@@ -61,8 +59,7 @@ public class EspecialidadController {
 		return resource;
 	}
 
-	//	@PostMapping
-	@RequestMapping(method=RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<Especialidad> registrar(@Valid @RequestBody Especialidad pac) {
 
 		Especialidad pacSaved = servicio.registrar(pac);
@@ -73,9 +70,7 @@ public class EspecialidadController {
 		return ResponseEntity.created(uriLocation).build();
 	}
 
-
-	//	@DeleteMapping(value = "/{id}")
-	@RequestMapping(method=RequestMethod.DELETE,value = "/{id}")
+	@DeleteMapping(value = "/{id}")
 	public void eliminarPorId(@PathVariable("id") Integer id){
 
 		if(servicio.listarPorId(id) != null) {
@@ -85,8 +80,7 @@ public class EspecialidadController {
 		}
 	}
 
-	//	@PutMapping
-	@RequestMapping(method=RequestMethod.PUT)
+	@PutMapping
 	public Especialidad modificar(@RequestBody Especialidad pac) {
 		return servicio.modificar(pac);
 	}

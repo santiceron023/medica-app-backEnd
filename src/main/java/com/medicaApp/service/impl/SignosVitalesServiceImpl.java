@@ -1,4 +1,4 @@
-package com.medicaApp.service.impl;
+package com.medicaapp.service.impl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,9 +9,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.medicaApp.dao.ISignosVitalesDao;
-import com.medicaApp.model.SignosVitales;
-import com.medicaApp.service.ISignosVitalesService;
+import com.medicaapp.dao.ISignosVitalesDao;
+import com.medicaapp.model.SignosVitales;
+import com.medicaapp.service.ISignosVitalesService;
 
 @Service
 public class SignosVitalesServiceImpl implements ISignosVitalesService{
