@@ -11,17 +11,17 @@ import javax.persistence.ManyToOne;
 //para usarla en defnicion de otra cosa
 @Embeddable 
 public class ConsultaExamenPk implements Serializable {
-//searilizable <- se agrega auto en @entities, pero en clase normal NO
-	
+	//searilizable <- se agrega auto en @entities, pero en clase normal NO
+
 	@JoinColumn(name="idExamen", nullable = false,foreignKey = @ForeignKey(name="conEx_examen") )
 	@ManyToOne
 	private Examen examen;
-	
+
 	@JoinColumn(name="idConsulta", nullable = false,foreignKey = @ForeignKey(name="conEx_consulta") )
 	@ManyToOne
 	private Consulta consulta;
 
-	
+
 
 	// al comparar objetos, compara es ref en memoria
 	// se necesita evaluar el valor de los id
@@ -43,18 +43,24 @@ public class ConsultaExamenPk implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ConsultaExamenPk other = (ConsultaExamenPk) obj;
+
 		if (consulta == null) {
 			if (other.consulta != null)
 				return false;
-		} else if (!consulta.equals(other.consulta))
+		} else if (!consulta.equals(other.consulta)) {
 			return false;
+		}
+
 		if (examen == null) {
 			if (other.examen != null)
 				return false;
-		} else if (!examen.equals(other.examen))
+		} else if (!examen.equals(other.examen)) {	
 			return false;
+		}
+
 		return true;
+
 	}
-	
-	
-	}
+
+
+}

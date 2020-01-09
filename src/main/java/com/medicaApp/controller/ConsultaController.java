@@ -68,8 +68,7 @@ public class ConsultaController {
 	@RequestMapping(method = RequestMethod.GET,value="/hateoas")
 	public ResponseEntity<List<ConsultaDto>> listarHateoas() {
 		List<ConsultaDto> consultasDto = new ArrayList<>();
-		List<Consulta> consultas = new ArrayList<>();
-		consultas = servicio.listar();
+		List<Consulta> consultas = servicio.listar();
 
 		for (Consulta consulta : consultas) {
 			ConsultaDto dto =  new ConsultaDto();

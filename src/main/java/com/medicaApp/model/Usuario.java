@@ -2,6 +2,7 @@ package com.medicaApp.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Usuario {
 
 	
 	//////////////////////////////////////////
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	//trae la lista de roles llena!, para spring security
 	@JoinTable(name = "usuario_rol", 
 	joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario")
