@@ -7,6 +7,6 @@ import com.medicaapp.model.SignosVitales;
 
 public interface ISignosVitalesService extends ICRUD<SignosVitales>{
 
-	List<SignosVitales> filtro(LocalDate fecha, Integer id, String nombre);
+	List<SignosVitales> filtro(LocalDate fecha, String string, String nombre);
 
 }

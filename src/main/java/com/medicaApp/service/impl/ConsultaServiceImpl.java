@@ -2,6 +2,7 @@ package com.medicaapp.service.impl;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,7 @@ import com.medicaapp.dao.IConsultaDao;
 import com.medicaapp.dao.IConsultaExamenDao;
 import com.medicaapp.dto.ConsultaListaExamenDto;
 import com.medicaapp.dto.ConsultaResumenDto;
-import com.medicaapp.dto.FiltroConsultaDto;
+import com.medicaapp.dto.FiltroConsultarDto;
 import com.medicaapp.model.Consulta;
 import com.medicaapp.service.IConsultaService;
 
@@ -33,7 +34,6 @@ public class ConsultaServiceImpl implements IConsultaService {
 
 	@Autowired
 	IConsultaDao conDao;
-	
 
 	//consultaDetalle
 	@Override
@@ -44,38 +44,28 @@ public class ConsultaServiceImpl implements IConsultaService {
 		return conDao.save(con);
 	}
 
-
 	@Override
-	@Transactional 
 	//Transaccional -> si hay un error en alguna entidad, hace roolback de todo
+	@Transactional 
+	//consulta+detalle+exámen
 	public Consulta registrarTransaccional(ConsultaListaExamenDto dto) { 
 
 		dto.getConsulta().getDetalleConsulta().forEach(
 				detalle -> detalle.setConsulta(dto.getConsulta()) 
 				);
 		conDao.save(dto.getConsulta());
-		
+
 		//insertar cada examen de la consulta(Ya creada)
 		dto.getExamenList().forEach(
 				exam -> conExaDao.registrar(
-				dto.getConsulta().getIdConsulta(),exam.getIdExamen() )
+						dto.getConsulta().getIdConsulta(),exam.getIdExamen() )
 				);	
 
 		return dto.getConsulta();
 	}
 
-
-	@Override
-	public Consulta modificar(Consulta t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void eliminar(Integer id) {
-		// TODO Auto-generated method stub
-
-	}
+	//	modificar(Consulta t)
+	//	eliminar(Integer id)
 
 	@Override
 	public List<Consulta> listar() {
@@ -88,26 +78,24 @@ public class ConsultaServiceImpl implements IConsultaService {
 		return opt.isPresent() ? opt.get() : new Consulta();
 	}
 
-
 	@Override
-	public List<Consulta> buscar(FiltroConsultaDto filtro) {
-		return conDao.buscar(filtro.getDni(), filtro.getNombreCompleto());
+	public List<Consulta> buscar(FiltroConsultarDto filtro) {
+		return conDao.buscar(filtro.getDocumentId(), filtro.getNombreCompleto());
 	}
 
 
 	@Override
-	public List<Consulta> buscarFecha(FiltroConsultaDto filtro) {
-		LocalDateTime fechaSgte = filtro.getFechaConsulta().plusDays(1);
-		return conDao.buscar(filtro.getFechaConsulta(), fechaSgte);
+	public List<Consulta> buscarFecha(FiltroConsultarDto filtro) {
+		LocalDateTime fechaMax = filtro.getFechaConsulta().atTime(LocalTime.MAX);
+		return conDao.buscar(
+				filtro.getFechaConsulta().atTime(LocalTime.MIN), fechaMax);
 	}
-
-
 
 
 	@Override
 	public List<ConsultaResumenDto> listarResumen() {
 		List<ConsultaResumenDto> consulta = new ArrayList<ConsultaResumenDto>();
-		
+		// IMPORTANTE: se mapea porque es un procedimiento
 		conDao.listarResumen().forEach( x -> {
 			ConsultaResumenDto item = new ConsultaResumenDto();
 			item.setCantidad((int) x[0] );
@@ -126,7 +114,7 @@ public class ConsultaServiceImpl implements IConsultaService {
 			JasperPrint print = JasperFillManager.fillReport(file.getPath(),
 					null, new JRBeanCollectionDataSource(this.listarResumen()));
 			data = JasperExportManager.exportReportToPdf(print);
-					
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,6 +122,6 @@ public class ConsultaServiceImpl implements IConsultaService {
 	}
 
 
-	
+
 
 }

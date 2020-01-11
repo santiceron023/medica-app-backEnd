@@ -1,6 +1,7 @@
 package com.medicaapp.service.impl;
 
 import java.time.LocalDate;
+import com.medicaapp.util.ParserUtils;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.medicaapp.dao.ISignosVitalesDao;
 import com.medicaapp.model.SignosVitales;
 import com.medicaapp.service.ISignosVitalesService;
+
 
 @Service
 public class SignosVitalesServiceImpl implements ISignosVitalesService{
@@ -34,9 +36,10 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 		dao.deleteById(id);		
 	}
 
+	//no used
 	@Override
 	public List<SignosVitales> listar() {
-		return dao.findAll();
+		return null;
 	}
 
 	@Override
@@ -47,13 +50,15 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 	}
 
 	@Override
-	public List<SignosVitales> filtro(LocalDate fecha, Integer id, String nombre) {
+	public List<SignosVitales> filtro(LocalDate fecha, String id, String nombre) {
 		LocalDateTime fechaFin = null;
 		LocalDateTime fechaInicio = null;
 		if(fecha != null) {
 			fechaFin = LocalDateTime.of(fecha, LocalTime.MAX);
 			fechaInicio = LocalDateTime.of(fecha, LocalTime.MIN);	
 		}
-		return dao.filtro(fechaInicio,fechaFin,id,nombre);		
+		id = ParserUtils.checkEmpty(id);
+		nombre = ParserUtils.checkEmpty(nombre);
+		return dao.filtro(fechaInicio,fechaFin,id,nombre);
 	}
 }

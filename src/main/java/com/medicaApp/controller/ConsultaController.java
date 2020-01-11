@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.medicaapp.dto.ConsultaDto;
 import com.medicaapp.dto.ConsultaListaExamenDto;
 import com.medicaapp.dto.ConsultaResumenDto;
-import com.medicaapp.dto.FiltroConsultaDto;
+import com.medicaapp.dto.FiltroConsultarDto;
 import com.medicaapp.model.Consulta;
 import com.medicaapp.model.Paciente;
 import com.medicaapp.service.IConsultaService;
@@ -101,7 +101,7 @@ public class ConsultaController {
 	}
 
 	@PostMapping(value = "buscar")
-	public ResponseEntity<List<Consulta>>filtroBuscar(@RequestBody FiltroConsultaDto filtro){
+	public ResponseEntity<List<Consulta>>filtroBuscar(@RequestBody FiltroConsultarDto filtro){
 		List<Consulta> consultas;
 		if( filtro.getFechaConsulta() != null) {
 			consultas = servicio.buscarFecha(filtro);
@@ -125,6 +125,8 @@ public class ConsultaController {
 		data= servicio.generarReporte();
 		return data;
 	}
+	
+	
 }
 
 

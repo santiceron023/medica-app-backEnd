@@ -40,13 +40,12 @@ public class PacienteController {
 	public ResponseEntity<List<Paciente>> listar(){		
 		return new ResponseEntity< List<Paciente> >(servicio.listar(),HttpStatus.OK);
 	}
-	
-	
+
+
 	@GetMapping(value="/pageable")
 	public ResponseEntity<Page<Paciente>> listarPageable(Pageable pageable){		
-		
-		return 
-				new ResponseEntity<Page<Paciente>> (servicio.listarPageable(pageable),HttpStatus.OK);
+		return new ResponseEntity<Page<Paciente>> 
+			(servicio.listarPageable(pageable),HttpStatus.OK);
 	}
 
 

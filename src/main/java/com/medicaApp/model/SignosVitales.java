@@ -3,13 +3,15 @@ package com.medicaapp.model;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "signosVitales")
+@Table(name = "signos_vitales")
 public class SignosVitales {
 	
 	@Id
@@ -17,6 +19,7 @@ public class SignosVitales {
 	
 	@JoinColumn(name = "paciente_id",nullable = false,foreignKey = @ForeignKey(name="signos_paciente"))
 	@ManyToOne
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Paciente paciente;
 	
 	private LocalDateTime fecha;
