@@ -15,11 +15,11 @@ import javax.persistence.Table;
 public class SignosVitales {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@JoinColumn(name = "paciente_id",nullable = false,foreignKey = @ForeignKey(name="signos_paciente"))
 	@ManyToOne
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Paciente paciente;
 	
 	private LocalDateTime fecha;

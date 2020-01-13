@@ -18,11 +18,7 @@ public class FiltroConsultarDto {
 	//    yyyy-MM-dd
 	private LocalDate fechaConsulta;
 	
-	
 
-
-	public FiltroConsultarDto() {
-	}
 	public String getDocumentId() {
 		return documentId;
 	}
