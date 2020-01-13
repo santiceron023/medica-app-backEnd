@@ -39,7 +39,7 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 	//no used
 	@Override
 	public List<SignosVitales> listar() {
-		return null;
+		return this.filtro(null,null,null);
 	}
 
 	@Override
