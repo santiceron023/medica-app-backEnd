@@ -23,12 +23,16 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 
 	@Override
 	public SignosVitales registrar(SignosVitales t) {
+		t.setFecha( LocalDateTime.of(
+						t.getFecha().toLocalDate(),LocalTime.now()
+						)
+				);
 		return dao.save(t);
 	}
 
 	@Override
 	public SignosVitales modificar(SignosVitales t) {
-		return dao.save(t);
+		return this.registrar(t);
 	}
 
 	@Override
@@ -36,7 +40,7 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 		dao.deleteById(id);		
 	}
 
-	//no used
+
 	@Override
 	public List<SignosVitales> listar() {
 		return this.filtro(null,null,null);

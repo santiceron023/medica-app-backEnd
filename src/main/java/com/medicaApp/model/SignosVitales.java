@@ -14,22 +14,35 @@ import javax.persistence.Table;
 @Table(name = "signos_vitales")
 public class SignosVitales {
 	
+	public SignosVitales() {
+	}
+
+	public SignosVitales(Integer id, Paciente paciente, LocalDateTime fecha, Float temperatura, Float pulso,
+			Float ritmoRespiratorio) {
+		this.id = id;
+		this.paciente = paciente;
+		this.fecha = fecha;
+		this.temperatura = temperatura;
+		this.pulso = pulso;
+		this.ritmoRespiratorio = ritmoRespiratorio;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JoinColumn(name = "paciente_id",nullable = false,foreignKey = @ForeignKey(name="signos_paciente"))
 	@ManyToOne
 	private Paciente paciente;
-	
+
 	private LocalDateTime fecha;
-	
+
 	private Float temperatura;
-	
+
 	private Float pulso;
-	
+
 	private Float ritmoRespiratorio;
-	
+
 	public Float getPulso() {
 		return pulso;
 	}
@@ -77,5 +90,5 @@ public class SignosVitales {
 	public void setRitmoRespiratorio(Float ritmoRespiratorio) {
 		this.ritmoRespiratorio = ritmoRespiratorio;
 	}
-	
+
 }
