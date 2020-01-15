@@ -1,27 +1,22 @@
 package com.medicaapp.dto;
 
 public class PaginationRequestDto {
-	private Integer size;
-	private Integer page;
-	private String sortBy;
+	private Integer tamano;
+	private Integer pagina;
 	
+//	private String sortBy;
 	
-	public Integer getSize() {
-		return size;
+	public Integer getTamano() {
+		return tamano;
 	}
-	public void setSize(Integer size) {
-		this.size = size;
+	public void setTamano(Integer tamano) {
+		this.tamano = tamano;
 	}
-	public Integer getPage() {
-		return page;
+	public Integer getPagina() {
+		return pagina;
 	}
-	public void setPage(Integer page) {
-		this.page = page;
-	}
-	public String getSortBy() {
-		return sortBy;
-	}
-	public void setSortBy(String sortBy) {
-		this.sortBy = sortBy;
-	}
+	public void setPagina(Integer pagina) {
+		this.pagina = pagina;
+	}	
+
 }

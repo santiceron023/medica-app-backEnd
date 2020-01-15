@@ -1,18 +1,23 @@
 package com.medicaapp.service.impl;
 
 import java.time.LocalDate;
-import com.medicaapp.util.ParserUtils;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.medicaapp.dao.ISignosVitalesDao;
+import com.medicaapp.dto.PaginationRequestDto;
 import com.medicaapp.model.SignosVitales;
 import com.medicaapp.service.ISignosVitalesService;
+import com.medicaapp.util.ParserUtils;
 
 
 @Service
@@ -42,8 +47,8 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 
 
 	@Override
-	public List<SignosVitales> listar() {
-		return this.filtro(null,null,null);
+	public Page<SignosVitales> listarTodoPaginado(PaginationRequestDto pageReq) {
+		return this.filtroPaginado(null,null,null,pageReq);
 	}
 
 	@Override
@@ -54,7 +59,18 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 	}
 
 	@Override
-	public List<SignosVitales> filtro(LocalDate fecha, String id, String nombre) {
+	public Page<SignosVitales> filtroPaginado(LocalDate fecha, String id, String nombre, PaginationRequestDto pageReq) {
+		List<SignosVitales> lista = filtro(fecha, id, nombre);
+		
+		Pageable pageable = PageRequest.of(pageReq.getPagina(), pageReq.getTamano());
+		
+		int start = (int) pageable.getOffset();
+		int end = (start + pageable.getPageSize()) > lista.size() ? lista.size() : (start + pageable.getPageSize());
+		return new PageImpl<SignosVitales>(lista.subList(start, end), pageable, lista.size());
+		
+	}
+	
+	private List<SignosVitales> filtro(LocalDate fecha, String id, String nombre) {
 		LocalDateTime fechaFin = null;
 		LocalDateTime fechaInicio = null;
 		if(fecha != null) {
@@ -63,6 +79,12 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 		}
 		id = ParserUtils.checkEmpty(id);
 		nombre = ParserUtils.checkEmpty(nombre);
+		
 		return dao.filtro(fechaInicio,fechaFin,id,nombre);
+	}
+
+	@Override
+	public List<SignosVitales> listar() {
+		return filtro(null,null,null);
 	}
 }

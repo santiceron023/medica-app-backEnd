@@ -14,9 +14,10 @@ public interface ISignosVitalesDao extends JpaRepository<SignosVitales, Integer>
 	@Query(value =
 			"FROM SignosVitales s "
 			+ " WHERE "
-			+ " (:id = NULL or s.paciente.dni LIKE :id)"
-			+ " AND (:nombre = NULL or s.paciente.nombres LIKE :nombre)"
-			+ " AND ( (CAST(:fecha1 AS java.time.LocalDateTime)) IS NULL or ( s.fecha BETWEEN :fecha1 AND :fecha2 ) ) "
+			+ " 	(:id = NULL or s.paciente.dni LIKE :id)"
+			+ " 	AND (:nombre = NULL or s.paciente.nombres LIKE :nombre)"
+			+ " 	AND ( (CAST(:fecha1 AS java.time.LocalDateTime)) IS NULL or ( s.fecha BETWEEN :fecha1 AND :fecha2 ) )"
+			+ " ORDER BY s.fecha DESC"
 			)
 	List<SignosVitales> filtro(
 			@Param(value = "fecha1") LocalDateTime fechaInicio,

@@ -51,9 +51,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-
-
 		<!-- swagger -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -146,9 +143,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				 <configuration>    
-                <mainClass>com.medicaapp.medicaAppBackEndApplication</mainClass>
-            </configuration>
+				<configuration>
+					<mainClass>com.medicaapp.medicaAppBackEndApplication</mainClass>
+				</configuration>
 			</plugin>
 
 			<!-- sonar qube -->

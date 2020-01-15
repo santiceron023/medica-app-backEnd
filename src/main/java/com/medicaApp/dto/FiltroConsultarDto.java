@@ -18,7 +18,23 @@ public class FiltroConsultarDto {
 	//    yyyy-MM-dd
 	private LocalDate fechaConsulta;
 	
-
+	private PaginationRequestDto pagina;
+	
+	
+	
+	public FiltroConsultarDto() {
+		this.pagina = new PaginationRequestDto();
+	}
+	
+	public PaginationRequestDto getPagina() {
+		return pagina;
+	}
+	public void setPagina(PaginationRequestDto pagina) {
+		this.pagina = pagina;
+	}
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
+	}
 	public String getDocumentId() {
 		return documentId;
 	}

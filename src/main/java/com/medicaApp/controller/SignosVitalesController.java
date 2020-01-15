@@ -1,12 +1,9 @@
 package com.medicaapp.controller;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medicaapp.dto.FiltroConsultarDto;
+import com.medicaapp.dto.PaginationRequestDto;
 import com.medicaapp.model.SignosVitales;
 import com.medicaapp.service.ISignosVitalesService;
 
@@ -27,10 +25,10 @@ public class SignosVitalesController {
 	private ISignosVitalesService service;
 
 
-	@GetMapping
+	@PostMapping("/listar")
 	@ResponseStatus(HttpStatus.OK)
-	public List<SignosVitales> listarTodos(){
-		return service.listar();
+	public Page<SignosVitales> listarTodos(@RequestBody PaginationRequestDto pageReq){
+		return service.listarTodoPaginado(pageReq);
 	}
 
 	@PostMapping
@@ -53,14 +51,15 @@ public class SignosVitalesController {
 
 	@PostMapping("/filtro")
 	@ResponseStatus(HttpStatus.OK)
-	public List<SignosVitales> filtro(
+	public Page<SignosVitales> filtro(
 			@RequestBody(required = false) FiltroConsultarDto filtro){
 		if(filtro == null) {
 			filtro = new FiltroConsultarDto();
 		}
-		return service.filtro(filtro.getFechaConsulta(),
+		return service.filtroPaginado(filtro.getFechaConsulta(),
 				filtro.getDocumentId(),
-				filtro.getNombreCompleto());
+				filtro.getNombreCompleto(),
+				filtro.getPagina());
 	}
 
 
