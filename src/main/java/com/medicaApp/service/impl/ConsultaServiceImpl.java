@@ -11,6 +11,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.medicaapp.dao.IConsultaDao;
@@ -18,6 +22,7 @@ import com.medicaapp.dao.IConsultaExamenDao;
 import com.medicaapp.dto.ConsultaListaExamenDto;
 import com.medicaapp.dto.ConsultaResumenDto;
 import com.medicaapp.dto.FiltroConsultarDto;
+import com.medicaapp.dto.PaginationRequestDto;
 import com.medicaapp.model.Consulta;
 import com.medicaapp.service.IConsultaService;
 
@@ -88,16 +93,26 @@ public class ConsultaServiceImpl implements IConsultaService {
 	}
 
 	@Override
-	public List<Consulta> buscar(FiltroConsultarDto filtro) {
-		return conDao.buscar(filtro.getDocumentId(), filtro.getNombreCompleto());
+	public Page<Consulta> buscar(FiltroConsultarDto filtro) {
+		List<Consulta> lista = conDao.buscar(filtro.getDocumentId(), filtro.getNombreCompleto());
+		return this.paginar(lista, filtro.getPagina());
 	}
 
 
 	@Override
-	public List<Consulta> buscarFecha(FiltroConsultarDto filtro) {
+	public Page<Consulta> buscarFecha(FiltroConsultarDto filtro) {
 		LocalDateTime fechaMax = filtro.getFechaConsulta().atTime(LocalTime.MAX);
-		return conDao.buscar(
+		List<Consulta> lista = conDao.buscar(
 				filtro.getFechaConsulta().atTime(LocalTime.MIN), fechaMax);
+		return this.paginar(lista, filtro.getPagina());
+	}
+	
+	private Page<Consulta> paginar(List<Consulta> lista, PaginationRequestDto pageReq){
+		Pageable pageable = PageRequest.of(pageReq.getPagina(), pageReq.getTamano());
+
+		int start = (int) pageable.getOffset();
+		int end = (start + pageable.getPageSize()) > lista.size() ? lista.size() : (start + pageable.getPageSize());
+		return new PageImpl<Consulta>(lista.subList(start, end), pageable, lista.size());
 	}
 
 
@@ -128,6 +143,12 @@ public class ConsultaServiceImpl implements IConsultaService {
 			e.printStackTrace();
 		}
 		return data;
+	}
+
+	@Override
+	public Page<Consulta> listarPaginado(FiltroConsultarDto filtro) {
+		List<Consulta> lista = this.conDao.listarOrderbyFecha();
+		return this.paginar(lista, filtro.getPagina());
 	}
 
 

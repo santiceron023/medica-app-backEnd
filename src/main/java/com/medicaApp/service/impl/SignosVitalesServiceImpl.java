@@ -29,9 +29,8 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 	@Override
 	public SignosVitales registrar(SignosVitales t) {
 		t.setFecha( LocalDateTime.of(
-						t.getFecha().toLocalDate(),LocalTime.now()
-						)
-				);
+				t.getFecha().toLocalDate(),LocalTime.now()
+				));
 		return dao.save(t);
 	}
 
@@ -61,15 +60,15 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 	@Override
 	public Page<SignosVitales> filtroPaginado(LocalDate fecha, String id, String nombre, PaginationRequestDto pageReq) {
 		List<SignosVitales> lista = filtro(fecha, id, nombre);
-		
+
 		Pageable pageable = PageRequest.of(pageReq.getPagina(), pageReq.getTamano());
-		
+
 		int start = (int) pageable.getOffset();
 		int end = (start + pageable.getPageSize()) > lista.size() ? lista.size() : (start + pageable.getPageSize());
 		return new PageImpl<SignosVitales>(lista.subList(start, end), pageable, lista.size());
-		
+
 	}
-	
+
 	private List<SignosVitales> filtro(LocalDate fecha, String id, String nombre) {
 		LocalDateTime fechaFin = null;
 		LocalDateTime fechaInicio = null;
@@ -79,7 +78,7 @@ public class SignosVitalesServiceImpl implements ISignosVitalesService{
 		}
 		id = ParserUtils.checkEmpty(id);
 		nombre = ParserUtils.checkEmpty(nombre);
-		
+
 		return dao.filtro(fechaInicio,fechaFin,id,nombre);
 	}
 

@@ -2,10 +2,13 @@ package com.medicaapp.controller;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.medicaapp.dto.ConsultaDto;
 import com.medicaapp.dto.ConsultaListaExamenDto;
 import com.medicaapp.dto.ConsultaResumenDto;
@@ -101,11 +105,13 @@ public class ConsultaController {
 	}
 
 	@PostMapping(value = "buscar")
-	public ResponseEntity<List<Consulta>>filtroBuscar(@RequestBody FiltroConsultarDto filtro){
-		List<Consulta> consultas;
-		if( filtro.getFechaConsulta() != null) {
+	public ResponseEntity<Page<Consulta>>filtroBuscar(@RequestBody FiltroConsultarDto filtro){
+		Page<Consulta> consultas = null;
+		if(filtro.getFechaConsulta() == null && filtro.getNombreCompleto() == null ) {
+			consultas = servicio.listarPaginado(filtro);
+		}else if( filtro.getFechaConsulta() != null) {
 			consultas = servicio.buscarFecha(filtro);
-		}else {
+		}else if( filtro.getNombreCompleto() != null) {
 			consultas = servicio.buscar(filtro);
 		}
 		return new ResponseEntity<>(consultas,HttpStatus.OK);
