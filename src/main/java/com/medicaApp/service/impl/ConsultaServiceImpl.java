@@ -38,6 +38,11 @@ public class ConsultaServiceImpl implements IConsultaService {
 	//consultaDetalle
 	@Override
 	public Consulta registrar(Consulta con) { 
+
+		con.setFecha( LocalDateTime.of(
+				con.getFecha().toLocalDate(),LocalTime.now()
+				));
+
 		con.getDetalleConsulta().forEach(
 				detalle -> detalle.setConsulta(con) 
 				);
@@ -49,6 +54,10 @@ public class ConsultaServiceImpl implements IConsultaService {
 	@Transactional 
 	//consulta+detalle+exámen
 	public Consulta registrarTransaccional(ConsultaListaExamenDto dto) { 
+
+		dto.getConsulta().setFecha( LocalDateTime.of(
+				dto.getConsulta().getFecha().toLocalDate(),LocalTime.now()
+				));
 
 		dto.getConsulta().getDetalleConsulta().forEach(
 				detalle -> detalle.setConsulta(dto.getConsulta()) 
