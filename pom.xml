@@ -13,7 +13,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sfc</groupId>
-	<artifactId>medicaapp</artifactId>
+	<artifactId>medicaAppApi</artifactId>
 	<version>0.9</version>
 	<name>medicaAppBackEnd</name>
 	<description>Aplicacion Médica</description>
