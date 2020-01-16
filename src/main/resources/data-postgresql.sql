@@ -1,18 +1,18 @@
---uSUARIOS
---pass:123
+-- USUARIOS
+-- pass:123
 INSERT INTO usuario(id_usuario, nombre, clave, estado) values (1, 'santiceron023@gmail.com', '$2a$10$2X3eUIX1YLxFvhAEhEjq0egobLNtUQt3IpSb004F5mos4uZaYLr8S', '1');
 INSERT INTO usuario(id_usuario, nombre, clave, estado) values (2, 'carolina', '$2a$10$LqoOi76zHOwgcwjF2K6cL.Aoqc4cb7MnehuYvOVjrdTm1qmAHxfP6', '1');
 
---ROL
+-- ROL
 INSERT INTO Rol (id_rol, nombre, descripcion) VALUES (1, 'ADMIN', 'Administrador');
 INSERT INTO Rol (id_rol, nombre, descripcion) VALUES (2, 'USER', 'Usuario');
 INSERT INTO Rol (id_rol, nombre, descripcion) VALUES (3, 'DBA', 'Adminsitrador de base de datos');
---ASIGNAR ROL
+-- ASIGNAR ROL
 INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (1, 1);
 INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (1, 3);
 INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (2, 2);
 
---MENU
+-- MENU
 INSERT INTO menu(id_menu, nombre, icono, url) VALUES (1, 'Buscar', 'search', '/buscar');
 INSERT INTO menu(id_menu, nombre, icono, url) VALUES (2, 'Registrar', 'insert_drive_file', '/consulta');
 INSERT INTO menu(id_menu, nombre, icono, url) VALUES (3, 'Registrar E.', 'insert_drive_file', '/consulta-especial');
@@ -24,7 +24,7 @@ INSERT INTO menu(id_menu, nombre, icono, url) VALUES (8, 'Reportes', 'assessment
 INSERT INTO menu(id_menu, nombre, icono, url) VALUES (9, 'SignosVitales', 'insert_chart', '/signosvitales');
 INSERT INTO menu(id_menu, nombre, icono, url) VALUES (10, 'Archivos', 'attach_file', '/archivo');
 
---ROL A MENÚ
+-- ROL A MENÚ
 INSERT INTO menu_rol (id_menu, id_rol) VALUES (1, 1);
 INSERT INTO menu_rol (id_menu, id_rol) VALUES (2, 1);
 INSERT INTO menu_rol (id_menu, id_rol) VALUES (3, 1);
@@ -41,11 +41,13 @@ INSERT INTO menu_rol (id_menu, id_rol) VALUES (5, 2);
 INSERT INTO menu_rol (id_menu, id_rol) VALUES (6, 2);
 INSERT INTO menu_rol (id_menu, id_rol) VALUES (7, 2);
 
-select m.* from menu_rol mr inner join usuario_rol ur 	on ur.id_rol = mr.id_rol
-							inner join menu m 			on m.id_menu = mr.id_menu
-							inner join usuario u 		on u.id_usuario = ur.id_usuario
-where u.nombre = 'jaime';
+--- VERIFICAR
+-- select m.* from menu_rol mr inner join usuario_rol ur 	on ur.id_rol = mr.id_rol
+-- 							inner join menu m 			on m.id_menu = mr.id_menu
+-- 							inner join usuario u 		on u.id_usuario = ur.id_usuario
+-- where u.nombre = 'carolina';
 
+-- TABLA TOKEN
 create table oauth_access_token (
   token_id VARCHAR(256),
   token bytea,
@@ -56,26 +58,17 @@ create table oauth_access_token (
   refresh_token VARCHAR(256)
 );
 
-
--- FUNCTION: public.fn_listarresumen()
-
--- DROP FUNCTION public.fn_listarresumen();
-
-CREATE OR REPLACE FUNCTION public.fn_listarresumen(
-	)
+-- PROCEDIMIENTO ALMACENADO : listarresumen()
+CREATE OR REPLACE 
+  FUNCTION public.fn_listarresumen()
     RETURNS TABLE(cantidad integer, fecha text) 
-    LANGUAGE 'plpgsql'
-
-    COST 100
-    VOLATILE 
-    ROWS 1000
-    
-AS $BODY$
+  LANGUAGE 'plpgsql' 
+AS '
 declare var_r record;
 begin
 for var_r in(
  	select (count(*)::int) as cantidad,
-	to_char(c.fecha,'dd/MM/yyyy') as fecha
+	to_char(c.fecha,''dd/MM/yyyy'') as fecha
  		from consulta c group by c.fecha order by c.fecha asc)
 loop
   	cantidad := var_r.cantidad;
@@ -83,7 +76,8 @@ loop
   	return next;
 end loop;
  
-end; $BODY$;
+end;';   
 
 ALTER FUNCTION public.fn_listarresumen()
     OWNER TO postgres;
+

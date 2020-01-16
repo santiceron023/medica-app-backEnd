@@ -1,16 +1,18 @@
 ﻿# Medica App
 ### Back End Api
 
-Administración de reservas para parque con canchas de tenis.
+Administración de consultas médicas, manejo de sesión, archivos y reportes.
 
 ## Características
-* ***Arquitectura Hexagonal***
+* ***Arquitectura MVC***
 
-* Base de datos autogenerada (en construcción)
-* Uso de filtro con Fechas y paginación
-* Erroes centralizados y con plantilla para todos(incluye sesion)
+* Base de datos autogenerada, se configura en properties. Archivo -> data-posgres.sql
+* Uso de filtros con múltiples parámetros incluyendo Fechas
+* Erroes centralizados y se envía via rest con plantilla(incluye error sesión)
 * filtro CORS
-* Manejo de autorizaión y autenticación (tiene ejemplo de uso de un servicio)
+* Manejo de autorizaión y autenticación (tiene ejemplo de consumo de servicio personalizado en pacientes)
+* Consultas extensas paginadas(consulta,signos vitales)
+* Envío de correo electrónico.
 
 
 ## Tecnologías
